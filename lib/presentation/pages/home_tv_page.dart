@@ -1,3 +1,5 @@
+import 'package:ditonton/common/constants.dart';
+import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:flutter/material.dart';
 
@@ -26,8 +28,29 @@ class _HomeTvPageState extends State<HomeTvPage> {
               leading: Icon(Icons.movie),
               title: Text('Movies'),
               onTap: () {
+                Navigator.pushNamed(context, '/home');
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.tv),
+              title: Text('TV'),
+              onTap: () {
                 Navigator.pop(context);
               },
+            ),
+            ListTile(
+              leading: Icon(Icons.save_alt),
+              title: Text('Watchlist'),
+              onTap: () {
+                Navigator.pushNamed(context, HomeTvPage.ROUTE_NAME);
+              },
+            ),
+            ListTile(
+              onTap: () {
+                Navigator.pushNamed(context, AboutPage.ROUTE_NAME);
+              },
+              leading: Icon(Icons.info_outline),
+              title: Text('About'),
             ),
           ],
         ),
@@ -42,6 +65,20 @@ class _HomeTvPageState extends State<HomeTvPage> {
             icon: Icon(Icons.search),
           ),
         ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'On Air',
+                style: kHeading6,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
