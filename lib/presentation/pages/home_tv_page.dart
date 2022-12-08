@@ -1,7 +1,12 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
+import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
+import 'package:ditonton/presentation/provider/tv_list_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomeTvPage extends StatefulWidget {
   static const ROUTE_NAME = '/home-tv-page';
@@ -11,6 +16,14 @@ class HomeTvPage extends StatefulWidget {
 }
 
 class _HomeTvPageState extends State<HomeTvPage> {
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(
+      () => Provider.of<TvListNotifier>(context, listen: false)..fetchTvOnAir(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,9 +89,59 @@ class _HomeTvPageState extends State<HomeTvPage> {
                 'On Air',
                 style: kHeading6,
               ),
+              Consumer<TvListNotifier>(
+                builder: (context, data, child) {
+                  final state = data.onAirState;
+                  if (state == RequestState.Loading) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (state == RequestState.Loaded) {
+                    return TvList(data.tvOnAir);
+                  } else {
+                    return Text('Failed');
+                  }
+                },
+              )
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class TvList extends StatelessWidget {
+  final List<Tv> tvs;
+
+  TvList(this.tvs);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 200,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          final tv = tvs[index];
+          return Container(
+            padding: const EdgeInsets.all(8),
+            child: InkWell(
+              onTap: () {},
+              child: ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(16)),
+                child: CachedNetworkImage(
+                  imageUrl: '$BASE_IMAGE_URL${tv.posterPath}',
+                  placeholder: (context, url) => Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
+                ),
+              ),
+            ),
+          );
+        },
+        itemCount: tvs.length,
       ),
     );
   }
