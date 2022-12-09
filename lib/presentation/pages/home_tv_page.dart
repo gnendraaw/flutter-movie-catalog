@@ -19,9 +19,8 @@ class _HomeTvPageState extends State<HomeTvPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(
-      () => Provider.of<TvListNotifier>(context, listen: false)..fetchTvOnAir(),
-    );
+    Future.microtask(() =>
+        Provider.of<TvListNotifier>(context, listen: false)..fetchTvOnAir());
   }
 
   @override
