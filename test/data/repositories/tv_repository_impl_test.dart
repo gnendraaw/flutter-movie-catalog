@@ -15,13 +15,16 @@ import '../../helpers/test_helper.mocks.dart';
 void main() {
   late TvRepositoryImpl repository;
   late MockTvRemoteDataSource mockRemoteDataSource;
+  late MockTvLocalDataSource mockLocalDataSource;
   late MockNetworkInfo mockNetworkInfo;
 
   setUp(() {
     mockRemoteDataSource = MockTvRemoteDataSource();
+    mockLocalDataSource = MockTvLocalDataSource();
     mockNetworkInfo = MockNetworkInfo();
     repository = TvRepositoryImpl(
       remoteDataSource: mockRemoteDataSource,
+      localDataSource: mockLocalDataSource,
       networkInfo: mockNetworkInfo,
     );
   });
