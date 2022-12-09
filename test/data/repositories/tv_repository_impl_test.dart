@@ -1,6 +1,12 @@
+import 'dart:io';
+
+import 'package:dartz/dartz.dart';
 import 'package:ditonton/data/models/tv_model.dart';
 import 'package:ditonton/data/repositories/tv_repository_impl.dart';
 import 'package:ditonton/domain/entities/tv.dart';
+import 'package:ditonton/common/network_info.dart';
+import 'package:ditonton/common/exception.dart';
+import 'package:ditonton/common/failure.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -60,10 +66,34 @@ void main() {
       // arrange
       when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
       when(mockRemoteDataSource.getTvOnAir()).thenAnswer((_) async => []);
+
       // act
       await repository.getTvOnAir();
+
       // assert
       verify(mockNetworkInfo.isConnected);
+    });
+
+    group('when device is online', () {
+      setUp(() {
+        when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+      });
+
+      test(
+          'should return remote data when call to remote data source is successful',
+          () async {
+        // arrange
+        when(mockRemoteDataSource.getTvOnAir())
+            .thenAnswer((_) async => tTvModelList);
+
+        // act
+        final result = await repository.getTvOnAir();
+
+        // assert
+        verify(mockRemoteDataSource.getTvOnAir());
+        final resultList = result.getOrElse(() => []);
+        expect(resultList, tTvList);
+      });
     });
   });
 }
