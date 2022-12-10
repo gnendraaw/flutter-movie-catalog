@@ -8,20 +8,19 @@ import '../../json_reader.dart';
 
 void main() {
   final tTvModel = TvModel(
-      backdropPath: "/3XjDhPzj7Myr8yzsTO8UB6E2oAu.jpg",
-      firstAirDate: "2011-02-28",
-      genreIds: [18, 80],
-      id: 31586,
-      name: "La Reina del Sur",
-      originCountry: ["US"],
-      originalLanguage: "es",
-      originalName: "La Reina del Sur",
-      overview:
-          "After years of blood, sweat and tears, a woman of humble origin ends up becoming a drug trafficking legend, with all that that means...",
-      popularity: 1476.202,
-      posterPath: "/uBTlJDdPpRxYTfUnKw4wbuIGSEK.jpg",
-      voteAverage: 7.8,
-      voteCount: 1471);
+      backdropPath: "/path.jpg",
+      firstAirDate: "2022-10-12",
+      genreIds: [1, 2, 3, 4],
+      id: 1,
+      name: "Name",
+      originCountry: ["JP"],
+      originalLanguage: "Original Language",
+      originalName: "Original Name",
+      overview: "Overview",
+      popularity: 1.0,
+      posterPath: "/path.jpg",
+      voteAverage: 1.0,
+      voteCount: 1);
 
   final tTvResponseModel = TvResponse(tvList: <TvModel>[tTvModel]);
 
@@ -64,7 +63,7 @@ void main() {
             "vote_average": 1.0,
             "vote_count": 1
           }
-        ]
+        ],
       };
       expect(result, expectedJsonMap);
     });
