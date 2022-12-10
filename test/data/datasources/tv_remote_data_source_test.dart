@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/data/datasources/tv_remote_data_source.dart';
 import 'package:ditonton/data/models/tv_detail_model.dart';
 import 'package:ditonton/data/models/tv_response.dart';
@@ -58,6 +59,20 @@ void main() {
 
       // assert
       expect(result, equals(tTvDetail));
+    });
+
+    test('should throw Server Exception when the response code is 404 or other',
+        () async {
+      // arrange
+      when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/$tId?$API_KEY')))
+          .thenAnswer((_) async => http.Response('Not Found', 404));
+
+      // act
+      final call = dataSource.getTvDetail(tId);
+
+      // assert
+      expect(() => call, throwsA(isA<ServerException>()));
+      ;
     });
   });
 }
