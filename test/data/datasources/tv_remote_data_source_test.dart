@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:ditonton/data/datasources/tv_remote_data_source.dart';
+import 'package:ditonton/data/models/tv_detail_model.dart';
 import 'package:ditonton/data/models/tv_response.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
@@ -38,6 +39,25 @@ void main() {
 
       // assert
       expect(result, equals(tTvList));
+    });
+  });
+
+  group('Get Tv Detail', () {
+    final tId = 1;
+    final tTvDetail = TvDetailModel.fromJson(
+        json.decode(readJson('dummy_data/tv_detail.json')));
+
+    test('should return tv detail when the response code is 200', () async {
+      // arrange
+      when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/$tId?$API_KEY')))
+          .thenAnswer((_) async =>
+              http.Response(readJson('dummy_data/tv_detail.json'), 200));
+
+      // act
+      final result = await dataSource.getTvDetail(tId);
+
+      // assert
+      expect(result, equals(tTvDetail));
     });
   });
 }

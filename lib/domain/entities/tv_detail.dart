@@ -7,7 +7,6 @@ class TvDetail extends Equatable {
     required this.backdropPath,
     required this.genres,
     required this.id,
-    required this.runtime,
     required this.name,
     required this.overview,
     required this.popularity,
@@ -20,7 +19,6 @@ class TvDetail extends Equatable {
   final String? backdropPath;
   final List<Genre> genres;
   final int id;
-  final int runtime;
   final String name;
   final String overview;
   final double popularity;
@@ -34,7 +32,6 @@ class TvDetail extends Equatable {
         backdropPath,
         genres,
         id,
-        runtime,
         name,
         overview,
         popularity,

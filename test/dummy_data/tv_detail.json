@@ -1,0 +1,84 @@
+{
+    "adult": false,
+    "backdrop_path": "/path.jpg",
+    "created_by": [
+        {
+            "id": 1,
+            "credit_id": "credit123",
+            "name": "Name",
+            "gender": 1,
+            "profile_path": "/path.jpg"
+        }
+    ],
+    "episode_run_time": [
+        1,
+        2,
+        3
+    ],
+    "first_air_date": "1111-11-11",
+    "genres": [
+        {
+            "id": 1,
+            "name": "name"
+        }
+    ],
+    "homepage": "path",
+    "id": 1,
+    "in_production": false,
+    "languages": [
+        "language"
+    ],
+    "last_air_date": "1111-11-11",
+    "last_episode_to_air": {
+        "air_date": "1111-11-11",
+        "episode_number": 1,
+        "id": 1,
+        "name": "Name",
+        "overview": "Overview",
+        "production_code": "code",
+        "runtime": 1,
+        "season_number": 1,
+        "show_id": 1,
+        "still_path": "/path.jpg",
+        "vote_average": 1.1,
+        "vote_count": 1
+    },
+    "name": "Name",
+    "next_episode_to_air": null,
+    "networks": [
+        {
+            "id": 1,
+            "name": "Name",
+            "logo_path": "/path.png",
+            "origin_country": "Country"
+        }
+    ],
+    "number_of_episodes": 1,
+    "number_of_seasons": 1,
+    "origin_country": [
+        "Country"
+    ],
+    "original_language": "language",
+    "original_name": "Name",
+    "overview": "Overview",
+    "popularity": 1.1,
+    "poster_path": "/path.jpg",
+    "production_companies": null,
+    "production_countries": null,
+    "seasons": [
+        {
+            "air_date": null,
+            "episode_count": 1,
+            "id": 1,
+            "name": "Name",
+            "overview": "Overview",
+            "poster_path": "/path.jpg",
+            "season_number": 1
+        }
+    ],
+    "status": "Status",
+    "tagline": "Tagline",
+    "type": "Type",
+    "vote_average": 1.0,
+    "vote_count": 1
+}

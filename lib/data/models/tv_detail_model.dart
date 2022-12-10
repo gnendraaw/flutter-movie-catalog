@@ -9,7 +9,6 @@ class TvDetailModel extends Equatable {
     required this.homepage,
     required this.genres,
     required this.id,
-    required this.runtime,
     required this.name,
     required this.originCountry,
     required this.originalLanguage,
@@ -26,7 +25,6 @@ class TvDetailModel extends Equatable {
   final List<GenreModel> genres;
   final String homepage;
   final int id;
-  final int runtime;
   final String name;
   final List<String> originCountry;
   final String originalLanguage;
@@ -51,7 +49,6 @@ class TvDetailModel extends Equatable {
         overview: json['overview'],
         popularity: json['popularity'].toDouble(),
         posterPath: json['poster_path'],
-        runtime: json['runtime'],
         voteAverage: json['vote_average'].toDouble(),
         voteCount: json['vote_count'],
       );
@@ -70,7 +67,6 @@ class TvDetailModel extends Equatable {
         overview,
         popularity,
         posterPath,
-        runtime,
         voteAverage,
         voteCount,
       ];
@@ -88,7 +84,6 @@ class TvDetailModel extends Equatable {
         "overview": overview,
         "popularity": popularity,
         "poster_path": posterPath,
-        "runtime": runtime,
         "vote_average": voteAverage,
         "vote_count": voteCount,
       };
@@ -103,7 +98,6 @@ class TvDetailModel extends Equatable {
       overview: this.overview,
       popularity: this.popularity,
       posterPath: this.posterPath,
-      runtime: this.runtime,
       voteAverage: this.voteAverage,
       voteCount: this.voteCount,
     );
