@@ -31,7 +31,12 @@ class TvRepositoryImpl implements TvRepository {
         return Left(ServerFailure(''));
       }
     } else {
-      return Left(ServerFailure(''));
+      try {
+        final result = await localDataSource.getCacheTvOnAir();
+        return Right(result.map((model) => model.toEntity()).toList());
+      } on CacheException catch (e) {
+        return Left(CacheFailure(e.message));
+      }
     }
   }
 }

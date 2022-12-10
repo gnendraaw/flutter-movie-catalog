@@ -10,6 +10,7 @@ import 'package:ditonton/common/failure.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../dummy_data/dummy_objects.dart';
 import '../../helpers/test_helper.mocks.dart';
 
 void main() {
@@ -96,6 +97,68 @@ void main() {
         verify(mockRemoteDataSource.getTvOnAir());
         final resultList = result.getOrElse(() => []);
         expect(resultList, tTvList);
+      });
+
+      test(
+          'should cache data locally when the call to remote data source is successful',
+          () async {
+        // arrange
+        when(mockRemoteDataSource.getTvOnAir())
+            .thenAnswer((_) async => tTvModelList);
+
+        // act
+        final result = await repository.getTvOnAir();
+
+        // assert
+        verify(mockRemoteDataSource.getTvOnAir());
+        verify(mockLocalDataSource.cachedTvOnAir([testTvCache]));
+      });
+
+      test(
+          'should return server failure when call to remote data source is unsuccessful',
+          () async {
+        // arrange
+        when(mockRemoteDataSource.getTvOnAir()).thenThrow(ServerException());
+
+        // act
+        final result = await repository.getTvOnAir();
+
+        // assert
+        verify(mockRemoteDataSource.getTvOnAir());
+        expect(result, equals(Left(ServerFailure(''))));
+      });
+    });
+
+    group('when device is offline', () {
+      setUp(() {
+        when(mockNetworkInfo.isConnected).thenAnswer((_) async => false);
+      });
+
+      test('should return cache data when device is offline', () async {
+        // arrange
+        when(mockLocalDataSource.getCacheTvOnAir())
+            .thenAnswer((_) async => [testTvCache]);
+
+        // act
+        final result = await repository.getTvOnAir();
+
+        // assert
+        verify(mockLocalDataSource.getCacheTvOnAir());
+        final resultList = result.getOrElse(() => []);
+        expect(resultList, [testTvFromCache]);
+      });
+
+      test('should return CacheFailure when app has no cache', () async {
+        // arrange
+        when(mockLocalDataSource.getCacheTvOnAir())
+            .thenThrow(CacheException('No Cache'));
+
+        // act
+        final result = await repository.getTvOnAir();
+
+        // assert
+        verify(mockLocalDataSource.getCacheTvOnAir());
+        expect(result, Left(CacheFailure('No Cache')));
       });
     });
   });

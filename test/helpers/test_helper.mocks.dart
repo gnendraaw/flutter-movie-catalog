@@ -289,6 +289,11 @@ class MockTvLocalDataSource extends _i1.Mock implements _i18.TvLocalDataSource {
               returnValue: _i6.Future<void>.value(),
               returnValueForMissingStub: _i6.Future<void>.value())
           as _i6.Future<void>);
+  @override
+  _i6.Future<List<_i19.TvTable>> getCacheTvOnAir() => (super.noSuchMethod(
+          Invocation.method(#getCacheTvOnAir, []),
+          returnValue: _i6.Future<List<_i19.TvTable>>.value(<_i19.TvTable>[]))
+      as _i6.Future<List<_i19.TvTable>>);
 }
 
 /// A class which mocks [DatabaseHelper].

@@ -3,6 +3,7 @@ import 'package:ditonton/data/models/tv_table.dart';
 import 'package:ditonton/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
+import 'package:ditonton/domain/entities/tv.dart';
 
 final testMovie = Movie(
   adult: false,
@@ -89,4 +90,12 @@ final testTvCache = TvTable(
       "After years of blood, sweat and tears, a woman of humble origin ends up becoming a drug trafficking legend, with all that that means...",
   posterPath: "/uBTlJDdPpRxYTfUnKw4wbuIGSEK.jpg",
   title: "La Reina del Sur",
+);
+
+final testTvFromCache = Tv.watchlist(
+  id: 31586,
+  overview:
+      "After years of blood, sweat and tears, a woman of humble origin ends up becoming a drug trafficking legend, with all that that means...",
+  posterPath: "/uBTlJDdPpRxYTfUnKw4wbuIGSEK.jpg",
+  name: "La Reina del Sur",
 );

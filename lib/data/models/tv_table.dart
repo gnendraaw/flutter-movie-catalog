@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:ditonton/data/models/tv_model.dart';
+import 'package:ditonton/domain/entities/tv.dart';
 import 'package:equatable/equatable.dart';
 
 class TvTable extends Equatable {
@@ -34,6 +37,13 @@ class TvTable extends Equatable {
         'posterPath': posterPath,
         'overview': overview,
       };
+
+  Tv toEntity() => Tv.watchlist(
+        id: id,
+        overview: overview,
+        posterPath: posterPath,
+        name: title,
+      );
 
   @override
   List<Object?> get props => [id, title, posterPath, overview];

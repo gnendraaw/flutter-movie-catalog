@@ -67,7 +67,7 @@ class TvModel extends Equatable {
   Tv toEntity() {
     return Tv(
       backdropPath: this.backdropPath,
-      firstAirDate: firstAirDate,
+      firstAirDate: this.firstAirDate,
       genreIds: this.genreIds,
       id: this.id,
       name: this.name,
