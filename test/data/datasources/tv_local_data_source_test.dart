@@ -1,3 +1,4 @@
+import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/data/datasources/tv_local_data_source.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -41,6 +42,19 @@ void main() {
 
       // assert
       expect(result, 'Added to Watchlist');
+    });
+
+    test('should throw DatabaseException when insert to database is failed',
+        () async {
+      // arrange
+      when(mockDatabaseHelper.insertTvWatchlist(testTvTable))
+          .thenThrow(Exception());
+
+      // act
+      final call = dataSource.insertWatchlist(testTvTable);
+
+      // assert
+      expect(() => call, throwsA(isA<DatabaseException>()));
     });
   });
 }
