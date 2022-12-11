@@ -28,6 +28,30 @@ void main() {
       verify(
           mockDatabaseHelper.insertTvCacheTransaction([testTvCache], 'on air'));
     });
+
+    test('should return list of tvs from db when data exist', () async {
+      // arrange
+      when(mockDatabaseHelper.getCacheMovies('on air'))
+          .thenAnswer((_) async => [testTvCacheMap]);
+
+      // act
+      final result = await dataSource.getCacheTvOnAir();
+
+      // assert
+      expect(result, [testTvCache]);
+    });
+
+    test('should throw CacheExeption when cache data is not exist', () async {
+      // arrange
+      when(mockDatabaseHelper.getCacheMovies('on air'))
+          .thenAnswer((_) async => []);
+
+      // act
+      final result = dataSource.getCacheTvOnAir();
+
+      // assert
+      expect(() => result, throwsA(isA<CacheException>()));
+    });
   });
 
   group('Get Tv Detail by Id', () {
@@ -43,6 +67,17 @@ void main() {
 
       // assert
       expect(result, testTvTable);
+    });
+
+    test('should return null when data is not found', () async {
+      // arrange
+      when(mockDatabaseHelper.getTvById(tId)).thenAnswer((_) async => null);
+
+      // act
+      final result = await dataSource.getTvById(tId);
+
+      // assert
+      expect(result, null);
     });
   });
 
@@ -86,6 +121,19 @@ void main() {
 
       // assert
       expect(result, 'Removed from Watchlist');
+    });
+
+    test('should throw DatabaseException when remove from database is failed',
+        () async {
+      // arrange
+      when(mockDatabaseHelper.removeTvWatchlist(testTvTable))
+          .thenThrow(Exception());
+
+      // act
+      final call = dataSource.removeWatchlist(testTvTable);
+
+      // assert
+      expect(() => call, throwsA(isA<DatabaseException>()));
     });
   });
 }

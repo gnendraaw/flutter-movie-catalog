@@ -127,3 +127,11 @@ final testTvMap = {
   "posterPath": '/path.jpg',
   "overview": 'Overview',
 };
+
+final testTvCacheMap = {
+  "id": 31586,
+  "title": 'La Reina del Sur',
+  "posterPath": '/uBTlJDdPpRxYTfUnKw4wbuIGSEK.jpg',
+  "overview":
+      'After years of blood, sweat and tears, a woman of humble origin ends up becoming a drug trafficking legend, with all that that means...',
+};
