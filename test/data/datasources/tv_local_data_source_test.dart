@@ -28,4 +28,19 @@ void main() {
           mockDatabaseHelper.insertTvCacheTransaction([testTvCache], 'on air'));
     });
   });
+
+  group('save watchlist', () {
+    test('should return success message when insert to database is success',
+        () async {
+      // arrange
+      when(mockDatabaseHelper.insertTvWatchlist(testTvTable))
+          .thenAnswer((_) async => 1);
+
+      // act
+      final result = await dataSource.insertWatchlist(testTvTable);
+
+      // assert
+      expect(result, 'Added to Watchlist');
+    });
+  });
 }
