@@ -81,6 +81,8 @@ void init() {
   locator.registerFactory(
     () => TvDetailNotifier(
       getTvDetail: locator(),
+      getWatchListStatus: locator(),
+      saveWatchlistTv: locator(),
     ),
   );
 

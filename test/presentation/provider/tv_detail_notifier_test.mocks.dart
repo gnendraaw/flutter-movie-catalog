@@ -3,13 +3,16 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
+import 'dart:async' as _i6;
 
 import 'package:dartz/dartz.dart' as _i3;
-import 'package:ditonton/common/failure.dart' as _i6;
-import 'package:ditonton/domain/entities/tv_detail.dart' as _i7;
+import 'package:ditonton/common/failure.dart' as _i7;
+import 'package:ditonton/domain/entities/tv_detail.dart' as _i8;
+import 'package:ditonton/domain/repositories/movie_repository.dart' as _i4;
 import 'package:ditonton/domain/repositories/tv_repository.dart' as _i2;
-import 'package:ditonton/domain/usecases/get_tv_detail.dart' as _i4;
+import 'package:ditonton/domain/usecases/get_tv_detail.dart' as _i5;
+import 'package:ditonton/domain/usecases/get_watchlist_status.dart' as _i10;
+import 'package:ditonton/domain/usecases/save_watchlist_tv.dart' as _i9;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -33,10 +36,16 @@ class _FakeEither_1<L, R> extends _i1.SmartFake implements _i3.Either<L, R> {
       : super(parent, parentInvocation);
 }
 
+class _FakeMovieRepository_2 extends _i1.SmartFake
+    implements _i4.MovieRepository {
+  _FakeMovieRepository_2(Object parent, Invocation parentInvocation)
+      : super(parent, parentInvocation);
+}
+
 /// A class which mocks [GetTvDetail].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGetTvDetail extends _i1.Mock implements _i4.GetTvDetail {
+class MockGetTvDetail extends _i1.Mock implements _i5.GetTvDetail {
   MockGetTvDetail() {
     _i1.throwOnMissingStub(this);
   }
@@ -48,10 +57,54 @@ class MockGetTvDetail extends _i1.Mock implements _i4.GetTvDetail {
                   _FakeTvRepository_0(this, Invocation.getter(#repository)))
           as _i2.TvRepository);
   @override
-  _i5.Future<_i3.Either<_i6.Failure, _i7.TvDetail>> execute(int? id) =>
+  _i6.Future<_i3.Either<_i7.Failure, _i8.TvDetail>> execute(int? id) =>
       (super.noSuchMethod(Invocation.method(#execute, [id]),
-          returnValue: _i5.Future<_i3.Either<_i6.Failure, _i7.TvDetail>>.value(
-              _FakeEither_1<_i6.Failure, _i7.TvDetail>(
-                  this, Invocation.method(#execute, [id])))) as _i5
-          .Future<_i3.Either<_i6.Failure, _i7.TvDetail>>);
+          returnValue: _i6.Future<_i3.Either<_i7.Failure, _i8.TvDetail>>.value(
+              _FakeEither_1<_i7.Failure, _i8.TvDetail>(
+                  this, Invocation.method(#execute, [id])))) as _i6
+          .Future<_i3.Either<_i7.Failure, _i8.TvDetail>>);
+}
+
+/// A class which mocks [SaveWatchlistTv].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSaveWatchlistTv extends _i1.Mock implements _i9.SaveWatchlistTv {
+  MockSaveWatchlistTv() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i2.TvRepository get repository =>
+      (super.noSuchMethod(Invocation.getter(#repository),
+              returnValue:
+                  _FakeTvRepository_0(this, Invocation.getter(#repository)))
+          as _i2.TvRepository);
+  @override
+  _i6.Future<_i3.Either<_i7.Failure, String>> execute(_i8.TvDetail? tv) =>
+      (super.noSuchMethod(Invocation.method(#execute, [tv]),
+              returnValue: _i6.Future<_i3.Either<_i7.Failure, String>>.value(
+                  _FakeEither_1<_i7.Failure, String>(
+                      this, Invocation.method(#execute, [tv]))))
+          as _i6.Future<_i3.Either<_i7.Failure, String>>);
+}
+
+/// A class which mocks [GetWatchListStatus].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockGetWatchListStatus extends _i1.Mock
+    implements _i10.GetWatchListStatus {
+  MockGetWatchListStatus() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i4.MovieRepository get repository =>
+      (super.noSuchMethod(Invocation.getter(#repository),
+              returnValue:
+                  _FakeMovieRepository_2(this, Invocation.getter(#repository)))
+          as _i4.MovieRepository);
+  @override
+  _i6.Future<bool> execute(int? id) =>
+      (super.noSuchMethod(Invocation.method(#execute, [id]),
+          returnValue: _i6.Future<bool>.value(false)) as _i6.Future<bool>);
 }

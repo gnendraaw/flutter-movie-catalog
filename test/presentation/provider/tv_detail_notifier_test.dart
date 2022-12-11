@@ -3,6 +3,8 @@ import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/domain/usecases/get_tv_detail.dart';
+import 'package:ditonton/domain/usecases/get_watchlist_status.dart';
+import 'package:ditonton/domain/usecases/save_watchlist_tv.dart';
 import 'package:ditonton/presentation/provider/tv_detail_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -11,19 +13,24 @@ import 'package:mockito/annotations.dart';
 import '../../dummy_data/dummy_objects.dart';
 import 'tv_detail_notifier_test.mocks.dart';
 
-@GenerateMocks([GetTvDetail])
+@GenerateMocks([GetTvDetail, SaveWatchlistTv, GetWatchListStatus])
 void main() {
   late TvDetailNotifier provider;
   late MockGetTvDetail mockGetTvDetail;
+  late MockSaveWatchlistTv mockSaveWatchlistTv;
+  late MockGetWatchListStatus mockGetWatchListStatus;
   late int listenerCallCount;
 
   setUp(() {
     listenerCallCount = 0;
     mockGetTvDetail = MockGetTvDetail();
-    provider = TvDetailNotifier(getTvDetail: mockGetTvDetail)
-      ..addListener(() {
-        listenerCallCount += 1;
-      });
+    mockSaveWatchlistTv = MockSaveWatchlistTv();
+    mockGetWatchListStatus = MockGetWatchListStatus();
+    provider = TvDetailNotifier(
+      getTvDetail: mockGetTvDetail,
+      getWatchListStatus: mockGetWatchListStatus,
+      saveWatchlistTv: mockSaveWatchlistTv,
+    );
   });
 
   final tId = 1;
