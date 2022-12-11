@@ -6,6 +6,7 @@ abstract class TvLocalDataSource {
   Future<void> cachedTvOnAir(List<TvTable> tvs);
   Future<List<TvTable>> getCacheTvOnAir();
   Future<String> insertWatchlist(TvTable tv);
+  Future<String> removeWatchlist(TvTable tv);
   Future<TvTable?> getTvById(int id);
 }
 
@@ -35,6 +36,16 @@ class TvLocalDataSourceImpl implements TvLocalDataSource {
     try {
       await databaseHelper.insertTvWatchlist(tv);
       return 'Added to Watchlist';
+    } catch (e) {
+      throw DatabaseException(e.toString());
+    }
+  }
+
+  @override
+  Future<String> removeWatchlist(TvTable tv) async {
+    try {
+      await databaseHelper.removeTvWatchlist(tv);
+      return 'Removed from Watchlist';
     } catch (e) {
       throw DatabaseException(e.toString());
     }

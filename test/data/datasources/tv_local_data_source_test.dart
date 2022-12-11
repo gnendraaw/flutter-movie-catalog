@@ -73,4 +73,19 @@ void main() {
       expect(() => call, throwsA(isA<DatabaseException>()));
     });
   });
+
+  group('remove watchlist', () {
+    test('should return success message when remove from database is success',
+        () async {
+      // arrange
+      when(mockDatabaseHelper.removeTvWatchlist(testTvTable))
+          .thenAnswer((_) async => 1);
+
+      // act
+      final result = await dataSource.removeWatchlist(testTvTable);
+
+      // assert
+      expect(result, 'Removed from Watchlist');
+    });
+  });
 }

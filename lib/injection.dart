@@ -18,7 +18,9 @@ import 'package:ditonton/domain/usecases/get_tv_detail.dart';
 import 'package:ditonton/domain/usecases/get_tv_on_air.dart';
 import 'package:ditonton/domain/usecases/get_watchlist_movies.dart';
 import 'package:ditonton/domain/usecases/get_watchlist_status.dart';
+import 'package:ditonton/domain/usecases/get_watchlist_tv_status.dart';
 import 'package:ditonton/domain/usecases/remove_watchlist.dart';
+import 'package:ditonton/domain/usecases/remove_watchlist_tv.dart';
 import 'package:ditonton/domain/usecases/save_watchlist.dart';
 import 'package:ditonton/domain/usecases/save_watchlist_tv.dart';
 import 'package:ditonton/domain/usecases/search_movies.dart';
@@ -81,8 +83,9 @@ void init() {
   locator.registerFactory(
     () => TvDetailNotifier(
       getTvDetail: locator(),
-      getWatchListStatus: locator(),
+      getWatchlistTvStatus: locator(),
       saveWatchlistTv: locator(),
+      removeWatchlistTv: locator(),
     ),
   );
 
@@ -100,6 +103,8 @@ void init() {
   locator.registerLazySingleton(() => GetTvOnAir(locator()));
   locator.registerLazySingleton(() => GetTvDetail(locator()));
   locator.registerLazySingleton(() => SaveWatchlistTv(locator()));
+  locator.registerLazySingleton(() => RemoveWatchlistTv(locator()));
+  locator.registerLazySingleton(() => GetWatchlistTvStatus(locator()));
 
   // repository
   locator.registerLazySingleton<MovieRepository>(

@@ -24,8 +24,9 @@ class _TvDetailPageState extends State<TvDetailPage> {
     super.initState();
     Future.microtask(() {
       Provider.of<TvDetailNotifier>(context, listen: false)
-        ..fetchTvDetail(widget.id)
-        ..loadWatchlistStatus(widget.id);
+          .fetchTvDetail(widget.id);
+      Provider.of<TvDetailNotifier>(context, listen: false)
+          .loadWatchlistStatus(widget.id);
     });
   }
 
@@ -43,7 +44,7 @@ class _TvDetailPageState extends State<TvDetailPage> {
             return SafeArea(
               child: DetailContent(
                 tv,
-                provider.isAddedToWatclist,
+                provider.isAddedToWatchlist,
               ),
             );
           } else {
@@ -110,6 +111,10 @@ class DetailContent extends StatelessWidget {
                                   await Provider.of<TvDetailNotifier>(context,
                                           listen: false)
                                       .addWatchlist(tv);
+                                } else {
+                                  await Provider.of<TvDetailNotifier>(context,
+                                          listen: false)
+                                      .removeFromWatchList(tv);
                                 }
 
                                 final message = Provider.of<TvDetailNotifier>(
