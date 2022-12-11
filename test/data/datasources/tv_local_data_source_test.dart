@@ -30,6 +30,22 @@ void main() {
     });
   });
 
+  group('Get Tv Detail by Id', () {
+    final tId = 1;
+
+    test('should return Tv Detail Table when data is found', () async {
+      // arrange
+      when(mockDatabaseHelper.getTvById(tId))
+          .thenAnswer((_) async => testTvMap);
+
+      // act
+      final result = await dataSource.getTvById(tId);
+
+      // assert
+      expect(result, testTvTable);
+    });
+  });
+
   group('save watchlist', () {
     test('should return success message when insert to database is success',
         () async {

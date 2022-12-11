@@ -120,3 +120,10 @@ final testTvTable = TvTable(
   posterPath: '/path.jpg',
   overview: 'Overview',
 );
+
+final testTvMap = {
+  "id": 1,
+  "title": 'Name',
+  "posterPath": '/path.jpg',
+  "overview": 'Overview',
+};

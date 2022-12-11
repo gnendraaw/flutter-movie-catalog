@@ -67,4 +67,10 @@ class TvRepositoryImpl implements TvRepository {
       throw e;
     }
   }
+
+  @override
+  Future<bool> isAddedToWatchlist(int id) async {
+    final result = await localDataSource.getTvById(id);
+    return result != null;
+  }
 }

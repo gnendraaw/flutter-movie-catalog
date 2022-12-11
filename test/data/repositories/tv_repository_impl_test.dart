@@ -242,4 +242,18 @@ void main() {
       expect(result, Right('Added to Watchlist'));
     });
   });
+
+  group('get watchlist status', () {
+    test('should return watch status wheter data is found', () async {
+      // arrange
+      final tId = 1;
+      when(mockLocalDataSource.getTvById(tId)).thenAnswer((_) async => null);
+
+      // act
+      final result = await repository.isAddedToWatchlist(tId);
+
+      // assert
+      expect(result, false);
+    });
+  });
 }
