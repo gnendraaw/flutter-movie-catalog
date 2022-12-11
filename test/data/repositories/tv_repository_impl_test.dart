@@ -241,6 +241,44 @@ void main() {
       // assert
       expect(result, Right('Added to Watchlist'));
     });
+
+    test('should return DatabaseFailure when saving unsuccessful', () async {
+      // arrange
+      when(mockLocalDataSource.insertWatchlist(testTvTable))
+          .thenThrow(DatabaseException('Failed to add watchlist'));
+
+      // act
+      final result = await repository.saveWatchlist(testTvDetail);
+
+      // assert
+      expect(result, Left(DatabaseFailure('Failed to add watchlist')));
+    });
+  });
+
+  group('remove watchlist', () {
+    test('should return success message when remove success', () async {
+      // arrange
+      when(mockLocalDataSource.removeWatchlist(testTvTable))
+          .thenAnswer((_) async => 'Removed from watchlist');
+
+      // act
+      final result = await repository.removeWatchlist(testTvDetail);
+
+      // assert
+      expect(result, Right('Removed from watchlist'));
+    });
+
+    test('should return DatabaseFailure when remove unsuccess', () async {
+      // arrange
+      when(mockLocalDataSource.removeWatchlist(testTvTable))
+          .thenThrow(DatabaseException('Failed to remove watchlist'));
+
+      // act
+      final result = await repository.removeWatchlist(testTvDetail);
+
+      // assert
+      expect(result, Left(DatabaseFailure('Failed to remove watchlist')));
+    });
   });
 
   group('get watchlist status', () {
