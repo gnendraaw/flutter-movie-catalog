@@ -54,4 +54,17 @@ class TvRepositoryImpl implements TvRepository {
       return Left(ConnectionFailure('Failed to connect to the network'));
     }
   }
+
+  @override
+  Future<Either<Failure, String>> saveWatchlist(TvDetail tv) async {
+    try {
+      final result =
+          await localDataSource.insertWatchlist(TvTable.fromEntity(tv));
+      return Right(result);
+    } on DatabaseException catch (e) {
+      return Left(DatabaseFailure(e.message));
+    } catch (e) {
+      throw e;
+    }
+  }
 }

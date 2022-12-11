@@ -113,3 +113,10 @@ final testTvDetail = TvDetail(
   voteAverage: 1.0,
   voteCount: 1,
 );
+
+final testTvTable = TvTable(
+  id: 1,
+  title: 'Name',
+  posterPath: '/path.jpg',
+  overview: 'Overview',
+);

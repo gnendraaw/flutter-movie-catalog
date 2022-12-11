@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:ditonton/data/models/tv_model.dart';
 import 'package:ditonton/domain/entities/tv.dart';
+import 'package:ditonton/domain/entities/tv_detail.dart';
 import 'package:equatable/equatable.dart';
 
 class TvTable extends Equatable {
@@ -16,6 +17,13 @@ class TvTable extends Equatable {
     required this.posterPath,
     required this.overview,
   });
+
+  factory TvTable.fromEntity(TvDetail tv) => TvTable(
+        id: tv.id,
+        overview: tv.overview,
+        posterPath: tv.posterPath,
+        title: tv.name,
+      );
 
   factory TvTable.fromMap(Map<String, dynamic> map) => TvTable(
         id: map['id'],

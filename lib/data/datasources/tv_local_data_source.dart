@@ -5,6 +5,7 @@ import 'package:ditonton/data/models/tv_table.dart';
 abstract class TvLocalDataSource {
   Future<void> cachedTvOnAir(List<TvTable> tvs);
   Future<List<TvTable>> getCacheTvOnAir();
+  Future<String> insertWatchlist(TvTable tv);
 }
 
 class TvLocalDataSourceImpl implements TvLocalDataSource {
@@ -25,6 +26,16 @@ class TvLocalDataSourceImpl implements TvLocalDataSource {
       return result.map((data) => TvTable.fromMap(data)).toList();
     } else {
       throw CacheException("Can't get the data :(");
+    }
+  }
+
+  @override
+  Future<String> insertWatchlist(TvTable tv) async {
+    try {
+      await databaseHelper.insertTvWatchlist(tv);
+      return 'Added to Watchlist';
+    } catch (e) {
+      throw DatabaseException(e.toString());
     }
   }
 }

@@ -228,4 +228,18 @@ void main() {
           equals(Left(ConnectionFailure('Failed to connect to the network'))));
     });
   });
+
+  group('save watchlist', () {
+    test('should return success message when saving successful', () async {
+      // arrange
+      when(mockLocalDataSource.insertWatchlist(testTvTable))
+          .thenAnswer((_) async => 'Added to Watchlist');
+
+      // act
+      final result = await repository.saveWatchlist(testTvDetail);
+
+      // assert
+      expect(result, Right('Added to Watchlist'));
+    });
+  });
 }
