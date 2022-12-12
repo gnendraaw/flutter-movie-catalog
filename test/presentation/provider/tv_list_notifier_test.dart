@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/tv.dart';
+import 'package:ditonton/domain/usecases/get_popular_tvs.dart';
 import 'package:ditonton/domain/usecases/get_tv_on_air.dart';
 import 'package:ditonton/presentation/provider/tv_list_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -10,17 +11,20 @@ import 'package:mockito/annotations.dart';
 
 import 'tv_list_notifier_test.mocks.dart';
 
-@GenerateMocks([GetTvOnAir])
+@GenerateMocks([GetTvOnAir, GetPopularTvs])
 void main() {
   late TvListNotifier provider;
   late MockGetTvOnAir mockGetTvOnAir;
+  late MockGetPopularTvs mockGetPopularTvs;
   late int listenerCallCount;
 
   setUp(() {
     listenerCallCount = 0;
     mockGetTvOnAir = MockGetTvOnAir();
+    mockGetPopularTvs = MockGetPopularTvs();
     provider = TvListNotifier(
       getTvOnAir: mockGetTvOnAir,
+      getPopularTvs: mockGetPopularTvs,
     )..addListener(() {
         listenerCallCount += 1;
       });
@@ -94,6 +98,46 @@ void main() {
 
       // assert
       expect(provider.onAirState, RequestState.Error);
+      expect(provider.message, 'Server Failure');
+      expect(listenerCallCount, 2);
+    });
+  });
+
+  group('popular tvs', () {
+    test('should change state to loading when usecase is called', () async {
+      // arrange
+      when(mockGetPopularTvs.execute()).thenAnswer((_) async => Right(tTvList));
+
+      // act
+      provider.fetchPopularTvs();
+
+      // assert
+      expect(provider.popularTvsState, RequestState.Loading);
+    });
+
+    test('should change tvs data when data is goten successfully', () async {
+      // arrange
+      when(mockGetPopularTvs.execute()).thenAnswer((_) async => Right(tTvList));
+
+      // act
+      await provider.fetchPopularTvs();
+
+      // assert
+      expect(provider.popularTvsState, RequestState.Loaded);
+      expect(provider.popularTvs, tTvList);
+      expect(listenerCallCount, 2);
+    });
+
+    test('should return error when data is failed', () async {
+      // arrange
+      when(mockGetPopularTvs.execute())
+          .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+
+      // act
+      await provider.fetchPopularTvs();
+
+      // assert
+      expect(provider.popularTvsState, RequestState.Error);
       expect(provider.message, 'Server Failure');
       expect(listenerCallCount, 2);
     });
