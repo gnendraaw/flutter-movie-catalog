@@ -9,6 +9,7 @@ import 'package:http/http.dart' as http;
 abstract class TvRemoteDataSource {
   Future<List<TvModel>> getTvOnAir();
   Future<List<TvModel>> getPopularTv();
+  Future<List<TvModel>> getTopRatedTv();
   Future<TvDetailModel> getTvDetail(int id);
   Future<List<TvModel>> getTvRecommendations(int id);
 }
@@ -60,6 +61,18 @@ class TvRemoteDataSourceImpl implements TvRemoteDataSource {
   Future<List<TvModel>> getPopularTv() async {
     final response =
         await client.get(Uri.parse('$BASE_URL/tv/popular?$API_KEY'));
+
+    if (response.statusCode == 200) {
+      return TvResponse.fromJson(json.decode(response.body)).tvList;
+    } else {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<List<TvModel>> getTopRatedTv() async {
+    final response =
+        await client.get(Uri.parse('$BASE_URL/tv/top_rated?$API_KEY'));
 
     if (response.statusCode == 200) {
       return TvResponse.fromJson(json.decode(response.body)).tvList;

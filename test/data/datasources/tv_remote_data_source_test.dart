@@ -142,4 +142,23 @@ void main() {
       expect(result, tTvList);
     });
   });
+
+  group('get top rated tv', () {
+    final tTvList = TvResponse.fromJson(
+            json.decode(readJson('dummy_data/top_rated_tv.json')))
+        .tvList;
+
+    test('should return list of tv model when response code is 200', () async {
+      // arrange
+      when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/top_rated?$API_KEY')))
+          .thenAnswer((_) async =>
+              http.Response(readJson('dummy_data/top_rated_tv.json'), 200));
+
+      // act
+      final result = await dataSource.getTopRatedTv();
+
+      // assert
+      expect(result, tTvList);
+    });
+  });
 }
