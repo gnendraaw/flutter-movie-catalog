@@ -24,7 +24,8 @@ class _HomeTvPageState extends State<HomeTvPage> {
     super.initState();
     Future.microtask(() => Provider.of<TvListNotifier>(context, listen: false)
       ..fetchTvOnAir()
-      ..fetchPopularTvs());
+      ..fetchPopularTvs()
+      ..fetchTopRatedTvs());
   }
 
   @override
@@ -115,7 +116,7 @@ class _HomeTvPageState extends State<HomeTvPage> {
               ),
               _buildSubHeading(
                 title: 'Popular',
-                onTap: () => '',
+                onTap: () {},
               ),
               Consumer<TvListNotifier>(
                 builder: (context, data, child) {
@@ -126,6 +127,24 @@ class _HomeTvPageState extends State<HomeTvPage> {
                     );
                   } else if (state == RequestState.Loaded) {
                     return TvList(data.popularTvs);
+                  } else {
+                    return Text('Failed');
+                  }
+                },
+              ),
+              _buildSubHeading(
+                title: 'Top Rated',
+                onTap: () {},
+              ),
+              Consumer<TvListNotifier>(
+                builder: (context, data, child) {
+                  final state = data.topRatedState;
+                  if (state == RequestState.Loading) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (state == RequestState.Loaded) {
+                    return TvList(data.topRatedTvs);
                   } else {
                     return Text('Failed');
                   }
