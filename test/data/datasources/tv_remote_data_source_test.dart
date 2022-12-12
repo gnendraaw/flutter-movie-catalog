@@ -124,4 +124,22 @@ void main() {
       expect(() => call, throwsA(isA<ServerException>()));
     });
   });
+
+  group('get popular tv', () {
+    final tTvList =
+        TvResponse.fromJson(json.decode(readJson('dummy_data/popular_tv.json')))
+            .tvList;
+
+    test('should return list of tv model when response code is 200', () async {
+      // arrange
+      when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/popular?$API_KEY')))
+          .thenAnswer((_) async =>
+              http.Response(readJson('dummy_data/popular_tv.json'), 200));
+      // act
+      final result = await dataSource.getPopularTv();
+
+      // assert
+      expect(result, tTvList);
+    });
+  });
 }

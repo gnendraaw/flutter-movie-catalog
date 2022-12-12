@@ -165,6 +165,48 @@ void main() {
     });
   });
 
+  group('Popular Tvs', () {
+    test('sould return tv list when call to data source is success', () async {
+      // arrange
+      when(mockRemoteDataSource.getPopularTv())
+          .thenAnswer((_) async => tTvModelList);
+
+      // act
+      final result = await repository.getPopularTv();
+
+      // assert
+      final resultList = result.getOrElse(() => []);
+      expect(resultList, tTvList);
+    });
+
+    test('should return server failure when call to data source is failed',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getPopularTv()).thenThrow(ServerException());
+
+      // act
+      final result = await repository.getPopularTv();
+
+      // assert
+      expect(result, Left(ServerFailure('')));
+    });
+
+    test(
+        'should return connection failure when device is not connected to internet',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getPopularTv())
+          .thenThrow(SocketException('Failed to connect to the network'));
+
+      // act
+      final result = await repository.getPopularTv();
+
+      // assert
+      expect(
+          result, Left(ConnectionFailure('Failed to connect to the network')));
+    });
+  });
+
   group('Get Tv Detail', () {
     final tId = 1;
     final tTvResponse = TvDetailModel(
