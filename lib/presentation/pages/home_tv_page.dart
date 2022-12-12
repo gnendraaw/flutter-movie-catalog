@@ -3,6 +3,7 @@ import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
+import 'package:ditonton/presentation/pages/popular_tv_page.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/pages/tv_detail_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
@@ -116,7 +117,12 @@ class _HomeTvPageState extends State<HomeTvPage> {
               ),
               _buildSubHeading(
                 title: 'Popular',
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    PopularTvPage.ROUTE_NAME,
+                  );
+                },
               ),
               Consumer<TvListNotifier>(
                 builder: (context, data, child) {
