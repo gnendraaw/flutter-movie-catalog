@@ -29,26 +29,34 @@ void main() {
   testWidgets(
       'Watchlist button should display add icon when movie not added to watchlist',
       (WidgetTester tester) async {
+    // arrange
     when(mockNotifier.tvState).thenReturn(RequestState.Loaded);
     when(mockNotifier.tv).thenReturn(testTvDetail);
+    when(mockNotifier.isAddedToWatchlist).thenReturn(false);
 
+    // act
     final watchlistButtonIcon = find.byIcon(Icons.add);
 
     await tester.pumpWidget(_makeTestableWidget(TvDetailPage(id: 1)));
 
+    // assert
     expect(watchlistButtonIcon, findsOneWidget);
   });
 
   testWidgets(
-      'watchlist button should display check icon when movie is added to watchlist',
+      'Watchlist button should display check icon when movie added to watchlist',
       (WidgetTester tester) async {
+    // arrange
     when(mockNotifier.tvState).thenReturn(RequestState.Loaded);
     when(mockNotifier.tv).thenReturn(testTvDetail);
+    when(mockNotifier.isAddedToWatchlist).thenReturn(true);
 
-    final watchListButtonIcon = find.byIcon(Icons.check);
+    // act
+    final watchlistButtonIcon = find.byIcon(Icons.check);
 
     await tester.pumpWidget(_makeTestableWidget(TvDetailPage(id: 1)));
 
-    expect(watchListButtonIcon, findsOneWidget);
+    // assert
+    expect(watchlistButtonIcon, findsOneWidget);
   });
 }
