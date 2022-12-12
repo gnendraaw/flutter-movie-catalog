@@ -141,6 +141,18 @@ void main() {
       // assert
       expect(result, tTvList);
     });
+
+    test('should return server exception when response code is 404', () {
+      // arrange
+      when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/popular?$API_KEY')))
+          .thenAnswer((_) async => http.Response('Not Found', 404));
+
+      // act
+      final call = dataSource.getPopularTv();
+
+      // assert
+      expect(() => call, throwsA(isA<ServerException>()));
+    });
   });
 
   group('get top rated tv', () {
@@ -159,6 +171,18 @@ void main() {
 
       // assert
       expect(result, tTvList);
+    });
+
+    test('should return server exception when response code is 404', () {
+      // arrange
+      when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/top_rated?$API_KEY')))
+          .thenAnswer((_) async => http.Response('Not Found', 404));
+
+      // act
+      final call = dataSource.getTopRatedTv();
+
+      // assert
+      expect(() => call, throwsA(isA<ServerException>()));
     });
   });
 }
