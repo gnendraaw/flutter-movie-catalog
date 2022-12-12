@@ -1,7 +1,8 @@
 import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/domain/entities/tv_detail.dart';
 import 'package:ditonton/domain/usecases/get_tv_detail.dart';
-import 'package:ditonton/domain/usecases/get_watchlist_status.dart';
+import 'package:ditonton/domain/usecases/get_tv_recommendations.dart';
 import 'package:ditonton/domain/usecases/get_watchlist_tv_status.dart';
 import 'package:ditonton/domain/usecases/remove_watchlist_tv.dart';
 import 'package:ditonton/domain/usecases/save_watchlist_tv.dart';
@@ -13,12 +14,14 @@ class TvDetailNotifier extends ChangeNotifier {
 
   final GetTvDetail getTvDetail;
   final GetWatchlistTvStatus getWatchlistTvStatus;
+  final GetTvRecommendations getTvRecommendations;
   final SaveWatchlistTv saveWatchlistTv;
   final RemoveWatchlistTv removeWatchlistTv;
 
   TvDetailNotifier({
     required this.getTvDetail,
     required this.getWatchlistTvStatus,
+    required this.getTvRecommendations,
     required this.saveWatchlistTv,
     required this.removeWatchlistTv,
   });
@@ -28,6 +31,12 @@ class TvDetailNotifier extends ChangeNotifier {
 
   RequestState _tvState = RequestState.Empty;
   RequestState get tvState => _tvState;
+
+  List<Tv> _tvRecommendations = [];
+  List<Tv> get tvRecommendations => _tvRecommendations;
+
+  RequestState _recommendationState = RequestState.Empty;
+  RequestState get recommendationState => _recommendationState;
 
   String _message = '';
   String get message => _message;
@@ -40,6 +49,7 @@ class TvDetailNotifier extends ChangeNotifier {
     notifyListeners();
 
     final detailResult = await getTvDetail.execute(id);
+    final recommendationResult = await getTvRecommendations.execute(id);
     detailResult.fold(
       (failure) {
         _tvState = RequestState.Error;
@@ -47,8 +57,19 @@ class TvDetailNotifier extends ChangeNotifier {
         notifyListeners();
       },
       (tv) {
+        _recommendationState = RequestState.Loading;
         _tv = tv;
         notifyListeners();
+        recommendationResult.fold(
+          (failure) {
+            _recommendationState = RequestState.Error;
+            _message = failure.message;
+          },
+          (tvs) {
+            _recommendationState = RequestState.Loaded;
+            _tvRecommendations = tvs;
+          },
+        );
         _tvState = RequestState.Loaded;
         notifyListeners();
       },
