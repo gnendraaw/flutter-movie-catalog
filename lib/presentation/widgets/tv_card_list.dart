@@ -26,6 +26,7 @@ class TvCard extends StatelessWidget {
           children: [
             Card(
               child: Container(
+                width: MediaQuery.of(context).size.width,
                 margin: const EdgeInsets.only(
                   left: 16 + 80 + 16,
                   bottom: 8,
@@ -42,7 +43,7 @@ class TvCard extends StatelessWidget {
                     ),
                     SizedBox(height: 16),
                     Text(
-                      tv.overview ?? '-',
+                      tv.overview ?? "-",
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
