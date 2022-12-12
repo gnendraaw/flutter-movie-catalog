@@ -9,6 +9,7 @@ import 'package:http/http.dart' as http;
 abstract class TvRemoteDataSource {
   Future<List<TvModel>> getTvOnAir();
   Future<TvDetailModel> getTvDetail(int id);
+  Future<List<TvModel>> getTvRecommendations(int id);
 }
 
 class TvRemoteDataSourceImpl implements TvRemoteDataSource {
@@ -37,6 +38,18 @@ class TvRemoteDataSourceImpl implements TvRemoteDataSource {
 
     if (response.statusCode == 200) {
       return TvDetailModel.fromJson(json.decode(response.body));
+    } else {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<List<TvModel>> getTvRecommendations(int id) async {
+    final response = await client
+        .get(Uri.parse('$BASE_URL/tv/$id/recommendations?$API_KEY'));
+
+    if (response.statusCode == 200) {
+      return TvResponse.fromJson(json.decode(response.body)).tvList;
     } else {
       throw ServerException();
     }

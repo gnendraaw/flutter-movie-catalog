@@ -310,4 +310,23 @@ void main() {
       expect(resultList, [testWatchlistTvs]);
     });
   });
+
+  group('Get tv recommendations', () {
+    final tTvList = <TvModel>[];
+    final tId = 1;
+
+    test('should return data tv list when call is successful', () async {
+      // arrange
+      when(mockRemoteDataSource.getTvRecommendations(tId))
+          .thenAnswer((_) async => tTvList);
+
+      // act
+      final result = await repository.getTvRecommendations(tId);
+
+      // assert
+      verify(mockRemoteDataSource.getTvRecommendations(tId));
+      final resultList = result.getOrElse(() => []);
+      expect(resultList, equals(tTvList));
+    });
+  });
 }
