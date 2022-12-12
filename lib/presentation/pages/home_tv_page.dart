@@ -22,8 +22,9 @@ class _HomeTvPageState extends State<HomeTvPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        Provider.of<TvListNotifier>(context, listen: false)..fetchTvOnAir());
+    Future.microtask(() => Provider.of<TvListNotifier>(context, listen: false)
+      ..fetchTvOnAir()
+      ..fetchPopularTvs());
   }
 
   @override
@@ -115,6 +116,20 @@ class _HomeTvPageState extends State<HomeTvPage> {
               _buildSubHeading(
                 title: 'Popular',
                 onTap: () => '',
+              ),
+              Consumer<TvListNotifier>(
+                builder: (context, data, child) {
+                  final state = data.popularTvsState;
+                  if (state == RequestState.Loading) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (state == RequestState.Loaded) {
+                    return TvList(data.popularTvs);
+                  } else {
+                    return Text('Failed');
+                  }
+                },
               ),
             ],
           ),

@@ -13,6 +13,7 @@ import 'package:ditonton/domain/usecases/get_movie_detail.dart';
 import 'package:ditonton/domain/usecases/get_movie_recommendations.dart';
 import 'package:ditonton/domain/usecases/get_now_playing_movies.dart';
 import 'package:ditonton/domain/usecases/get_popular_movies.dart';
+import 'package:ditonton/domain/usecases/get_popular_tvs.dart';
 import 'package:ditonton/domain/usecases/get_top_rated_movies.dart';
 import 'package:ditonton/domain/usecases/get_tv_detail.dart';
 import 'package:ditonton/domain/usecases/get_tv_on_air.dart';
@@ -117,6 +118,7 @@ void init() {
   locator.registerLazySingleton(() => GetWatchlistTvStatus(locator()));
   locator.registerLazySingleton(() => GetWatchlistTvs(locator()));
   locator.registerLazySingleton(() => GetTvRecommendations(locator()));
+  locator.registerLazySingleton(() => GetPopularTvs(locator()));
 
   // repository
   locator.registerLazySingleton<MovieRepository>(
