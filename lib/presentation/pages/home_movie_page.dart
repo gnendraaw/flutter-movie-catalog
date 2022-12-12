@@ -7,6 +7,7 @@ import 'package:ditonton/presentation/pages/popular_movies_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
+import 'package:ditonton/presentation/pages/watchlist_tvs_page.dart';
 import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
 import 'package:ditonton/presentation/pages/home_tv_page.dart';
 import 'package:ditonton/common/state_enum.dart';
@@ -58,11 +59,17 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
             ),
             ListTile(
               leading: Icon(Icons.save_alt),
-              title: Text('Watchlist'),
+              title: Text('Movie Watchlist'),
               onTap: () {
                 Navigator.pushNamed(context, WatchlistMoviesPage.ROUTE_NAME);
               },
             ),
+            ListTile(
+                leading: Icon(Icons.save_alt),
+                title: Text('TV Watchlist'),
+                onTap: () {
+                  Navigator.pushNamed(context, WatchlistTvsPage.ROUTE_NAME);
+                }),
             ListTile(
               onTap: () {
                 Navigator.pushNamed(context, AboutPage.ROUTE_NAME);
