@@ -291,6 +291,13 @@ class MockTvRepository extends _i1.Mock implements _i15.TvRepository {
   _i7.Future<bool> isAddedToWatchlist(int? id) =>
       (super.noSuchMethod(Invocation.method(#isAddedToWatchlist, [id]),
           returnValue: _i7.Future<bool>.value(false)) as _i7.Future<bool>);
+  @override
+  _i7.Future<_i2.Either<_i8.Failure, List<_i16.Tv>>> getWatchlistTvs() =>
+      (super.noSuchMethod(Invocation.method(#getWatchlistTvs, []),
+          returnValue: _i7.Future<_i2.Either<_i8.Failure, List<_i16.Tv>>>.value(
+              _FakeEither_0<_i8.Failure, List<_i16.Tv>>(
+                  this, Invocation.method(#getWatchlistTvs, [])))) as _i7
+          .Future<_i2.Either<_i8.Failure, List<_i16.Tv>>>);
 }
 
 /// A class which mocks [TvRemoteDataSource].
@@ -347,6 +354,11 @@ class MockTvLocalDataSource extends _i1.Mock implements _i20.TvLocalDataSource {
       (super.noSuchMethod(Invocation.method(#getTvById, [id]),
               returnValue: _i7.Future<_i21.TvTable?>.value())
           as _i7.Future<_i21.TvTable?>);
+  @override
+  _i7.Future<List<_i21.TvTable>> getWatchlistTvs() => (super.noSuchMethod(
+          Invocation.method(#getWatchlistTvs, []),
+          returnValue: _i7.Future<List<_i21.TvTable>>.value(<_i21.TvTable>[]))
+      as _i7.Future<List<_i21.TvTable>>);
 }
 
 /// A class which mocks [DatabaseHelper].
