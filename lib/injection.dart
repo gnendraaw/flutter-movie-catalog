@@ -104,12 +104,12 @@ void init() {
     ),
   );
   locator.registerFactory(
-    () => PopularTvsNotifier(
+    () => TopRatedTvsNotifier(
       locator(),
     ),
   );
   locator.registerFactory(
-    () => TopRatedTvsNotifier(
+    () => PopularTvsNotifier(
       locator(),
     ),
   );

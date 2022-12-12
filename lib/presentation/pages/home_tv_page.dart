@@ -5,6 +5,7 @@ import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/popular_tv_page.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
+import 'package:ditonton/presentation/pages/top_rated_tvs_page.dart';
 import 'package:ditonton/presentation/pages/tv_detail_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_tvs_page.dart';
@@ -140,7 +141,12 @@ class _HomeTvPageState extends State<HomeTvPage> {
               ),
               _buildSubHeading(
                 title: 'Top Rated',
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    TopRatedTvsPage.ROUTE_NAME,
+                  );
+                },
               ),
               Consumer<TvListNotifier>(
                 builder: (context, data, child) {
