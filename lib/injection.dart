@@ -83,6 +83,7 @@ void init() {
     () => TvListNotifier(
       getTvOnAir: locator(),
       getPopularTvs: locator(),
+      getTopRatedTvs: locator(),
     ),
   );
   locator.registerFactory(
