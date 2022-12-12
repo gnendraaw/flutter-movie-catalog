@@ -1,6 +1,7 @@
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/common/utils.dart';
 import 'package:ditonton/presentation/provider/watchlist_tv_notifier.dart';
+import 'package:ditonton/presentation/widgets/tv_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -48,7 +49,7 @@ class _WatchlistTvsPageState extends State<WatchlistTvsPage> with RouteAware {
             return ListView.builder(
               itemBuilder: (context, index) {
                 final tv = data.watchlistTvs[index];
-                return Center();
+                return TvCard(tv);
               },
               itemCount: data.watchlistTvs.length,
             );

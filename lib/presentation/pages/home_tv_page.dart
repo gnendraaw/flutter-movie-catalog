@@ -5,6 +5,7 @@ import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/pages/tv_detail_page.dart';
+import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_tvs_page.dart';
 import 'package:ditonton/presentation/provider/tv_list_notifier.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +57,7 @@ class _HomeTvPageState extends State<HomeTvPage> {
               leading: Icon(Icons.save_alt),
               title: Text('Movie Watchlist'),
               onTap: () {
-                Navigator.pushNamed(context, HomeTvPage.ROUTE_NAME);
+                Navigator.pushNamed(context, WatchlistMoviesPage.ROUTE_NAME);
               },
             ),
             ListTile(
