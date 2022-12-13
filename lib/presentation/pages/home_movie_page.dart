@@ -37,6 +37,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
         child: Column(
           children: [
             UserAccountsDrawerHeader(
+              decoration: BoxDecoration(color: kRichBlack),
               currentAccountPicture: CircleAvatar(
                 backgroundImage: AssetImage('assets/circle-g.png'),
               ),

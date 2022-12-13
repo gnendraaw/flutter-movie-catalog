@@ -87,9 +87,7 @@ class MyApp extends StatelessWidget {
           textTheme: kTextTheme,
         ),
         home: Material(
-          child: CustomDrawer(
-            content: HomeMoviePage(),
-          ),
+          child: HomeMoviePage(),
         ),
         navigatorObservers: [routeObserver],
         onGenerateRoute: (RouteSettings settings) {
