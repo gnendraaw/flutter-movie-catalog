@@ -7,6 +7,7 @@ abstract class TvRepository {
   Future<Either<Failure, List<Tv>>> getTvOnAir();
   Future<Either<Failure, List<Tv>>> getPopularTv();
   Future<Either<Failure, List<Tv>>> getTopRatedTv();
+  Future<Either<Failure, List<Tv>>> searchTvs(String query);
   Future<Either<Failure, TvDetail>> getTvDetail(int id);
   Future<Either<Failure, List<Tv>>> getTvRecommendations(int id);
   Future<Either<Failure, String>> saveWatchlist(TvDetail tv);

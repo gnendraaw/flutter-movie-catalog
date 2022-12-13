@@ -443,4 +443,49 @@ void main() {
           equals(Left(ConnectionFailure('Failed to connect to the network'))));
     });
   });
+
+  group('search tvs', () {
+    final tQuery = 'halo';
+
+    test('should return tv list when call to data source is successful',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.searchTvs(tQuery))
+          .thenAnswer((_) async => tTvModelList);
+
+      // act
+      final result = await repository.searchTvs(tQuery);
+
+      // assert
+      final resultList = result.getOrElse(() => []);
+      expect(resultList, tTvList);
+    });
+
+    test('should return ServerFailure when call to data source is failed',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.searchTvs(tQuery)).thenThrow(ServerException());
+
+      // act
+      final result = await repository.searchTvs(tQuery);
+
+      // assert
+      expect(result, Left(ServerFailure('')));
+    });
+
+    test(
+        'should return ConnectionFailure when decice is not connected to the internet',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.searchTvs(tQuery))
+          .thenThrow(SocketException('Failed to connect to the network'));
+
+      // act
+      final result = await repository.searchTvs(tQuery);
+
+      // assert
+      expect(
+          result, Left(ConnectionFailure('Failed to connect to the network')));
+    });
+  });
 }
