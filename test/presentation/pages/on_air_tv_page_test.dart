@@ -1,25 +1,25 @@
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/tv.dart';
-import 'package:ditonton/presentation/pages/popular_tv_page.dart';
-import 'package:flutter/material.dart';
-import 'package:ditonton/presentation/provider/popular_tvs_notifier.dart';
+import 'package:ditonton/presentation/pages/on_air_tv_page.dart';
+import 'package:ditonton/presentation/provider/on_air_tvs_notifier.dart';
 import 'package:mockito/annotations.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter/material.dart';
 import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
 
-import 'popular_tvs_page_test.mocks.dart';
+import 'on_air_tv_page_test.mocks.dart';
 
-@GenerateMocks([PopularTvsNotifier])
+@GenerateMocks([OnAirTvsNotifier])
 void main() {
-  late MockPopularTvsNotifier mockNotifier;
+  late MockOnAirTvsNotifier mockNotifier;
 
   setUp(() {
-    mockNotifier = MockPopularTvsNotifier();
+    mockNotifier = MockOnAirTvsNotifier();
   });
 
   Widget _makeTestableWidget(Widget body) {
-    return ChangeNotifierProvider<PopularTvsNotifier>.value(
+    return ChangeNotifierProvider<OnAirTvsNotifier>.value(
       value: mockNotifier,
       child: MaterialApp(
         home: body,
@@ -34,7 +34,7 @@ void main() {
     final progressBarFinder = find.byType(CircularProgressIndicator);
     final centerFinder = find.byType(Center);
 
-    await tester.pumpWidget(_makeTestableWidget(PopularTvPage()));
+    await tester.pumpWidget(_makeTestableWidget(OnAirTvPage()));
 
     expect(centerFinder, findsOneWidget);
     expect(progressBarFinder, findsOneWidget);
@@ -47,7 +47,7 @@ void main() {
 
     final listViewFinder = find.byType(ListView);
 
-    await tester.pumpWidget(_makeTestableWidget(PopularTvPage()));
+    await tester.pumpWidget(_makeTestableWidget(OnAirTvPage()));
 
     expect(listViewFinder, findsOneWidget);
   });
@@ -59,7 +59,7 @@ void main() {
 
     final textFinder = find.byKey(Key('error_message'));
 
-    await tester.pumpWidget(_makeTestableWidget(PopularTvPage()));
+    await tester.pumpWidget(_makeTestableWidget(OnAirTvPage()));
 
     expect(textFinder, findsOneWidget);
   });
