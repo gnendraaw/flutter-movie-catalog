@@ -3,6 +3,7 @@ import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
+import 'package:ditonton/presentation/pages/home_movie_page.dart';
 import 'package:ditonton/presentation/pages/on_air_tv_page.dart';
 import 'package:ditonton/presentation/pages/popular_tv_page.dart';
 import 'package:ditonton/presentation/pages/search_tv_page.dart';
@@ -38,6 +39,7 @@ class _HomeTvPageState extends State<HomeTvPage> {
         child: Column(
           children: [
             UserAccountsDrawerHeader(
+              decoration: BoxDecoration(color: kRichBlack),
               currentAccountPicture: CircleAvatar(
                 backgroundImage: AssetImage('assets/circle-g.png'),
               ),
@@ -48,7 +50,10 @@ class _HomeTvPageState extends State<HomeTvPage> {
               leading: Icon(Icons.movie),
               title: Text('Movies'),
               onTap: () {
-                Navigator.pushNamed(context, '/home');
+                Navigator.pushReplacementNamed(
+                  context,
+                  '/home',
+                );
               },
             ),
             ListTile(

@@ -37,7 +37,6 @@ void main() {
   final tTv = Tv(
     backdropPath: '/path.jpg',
     genreIds: [1, 2, 3, 4],
-    firstAirDate: '1111-11-11',
     id: 1,
     name: 'Name',
     originCountry: ['Country'],

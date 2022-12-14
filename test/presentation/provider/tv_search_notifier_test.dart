@@ -27,7 +27,6 @@ void main() {
 
   final tTvModel = Tv(
     backdropPath: "/3XjDhPzj7Myr8yzsTO8UB6E2oAu.jpg",
-    firstAirDate: "2011-02-28",
     genreIds: [18, 80],
     id: 31586,
     name: "La Reina del Sur",

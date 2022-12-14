@@ -9,7 +9,6 @@ import '../../json_reader.dart';
 void main() {
   final tTvModel = TvModel(
       backdropPath: "/path.jpg",
-      firstAirDate: "2022-10-12",
       genreIds: [1, 2, 3, 4],
       id: 1,
       name: "Name",
