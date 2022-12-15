@@ -1,4 +1,4 @@
-name: about
+name: core
 description: A new Flutter package project.
 version: 0.0.1
 homepage:
@@ -10,8 +10,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  core:
-    path: ../core
+  google_fonts: ^3.0.1
+  equatable: ^2.0.2
+  data_connection_checker:
+    git:
+      url: https://github.com/chornthorn/data_connection_checker.git
+      ref: master
 
 dev_dependencies:
   flutter_test:
