@@ -6,10 +6,11 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:search/domain/usecase/search_movies.dart';
 
-import '../../presentation/provider/movie_search_notifier_test.mocks.dart';
+import 'search_movies_test.mocks.dart';
 
+@GenerateMocks([MovieRepository])
 void main() {
-  late MockSearchMovies usecase;
+  late SearchMovies usecase;
   late MockMovieRepository mockMovieRepository;
 
   setUp(() {

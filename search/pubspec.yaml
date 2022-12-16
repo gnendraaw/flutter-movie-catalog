@@ -8,12 +8,12 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
-  core:
-    path: ../core
   flutter:
     sdk: flutter
   provider: ^6.0.3
   dartz: ^0.10.0-nullsafety.2
+  core:
+    path: ../core
 
 dev_dependencies:
   mockito: ^5.0.8
