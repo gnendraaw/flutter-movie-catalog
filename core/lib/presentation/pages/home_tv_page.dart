@@ -99,7 +99,7 @@ class _HomeTvPageState extends State<HomeTvPage> {
             onPressed: () {
               Navigator.pushNamed(
                 context,
-                SEARCH_ROUTE,
+                TV_SEARCH_ROUTE,
               );
             },
             icon: Icon(Icons.search),

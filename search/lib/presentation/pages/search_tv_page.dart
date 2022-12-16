@@ -1,8 +1,8 @@
 import 'package:core/core.dart';
-import 'package:core/presentation/provider/tv_search_notifier.dart';
 import 'package:core/presentation/widgets/tv_card_list.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:search/presentation/provider/tv_search_notifier.dart';
+import 'package:flutter/material.dart';
 
 class SearchTvPage extends StatelessWidget {
   static const ROUTE_NAME = '/search-tv';

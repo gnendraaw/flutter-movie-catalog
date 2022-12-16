@@ -1,7 +1,7 @@
 import 'package:core/core.dart';
 import 'package:core/domain/entities/tv.dart';
-import 'package:core/domain/usecases/search_tvs.dart';
 import 'package:flutter/foundation.dart';
+import 'package:search/domain/usecase/search_tvs.dart';
 
 class TvSearchNotifier extends ChangeNotifier {
   final SearchTvs searchTvs;
