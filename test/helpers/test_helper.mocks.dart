@@ -4,30 +4,28 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i7;
-import 'dart:convert' as _i25;
-import 'dart:typed_data' as _i26;
+import 'dart:convert' as _i24;
+import 'dart:typed_data' as _i25;
 
+import 'package:core/core.dart' as _i8;
+import 'package:core/data/datasources/db/database_helper.dart' as _i22;
+import 'package:core/data/datasources/movie_local_data_source.dart' as _i13;
+import 'package:core/data/datasources/movie_remote_data_source.dart' as _i11;
+import 'package:core/data/datasources/tv_local_data_source.dart' as _i20;
+import 'package:core/data/datasources/tv_remote_data_source.dart' as _i18;
+import 'package:core/data/models/movie_detail_model.dart' as _i3;
+import 'package:core/data/models/movie_model.dart' as _i12;
+import 'package:core/data/models/movie_table.dart' as _i14;
+import 'package:core/data/models/tv_detail_model.dart' as _i4;
+import 'package:core/data/models/tv_model.dart' as _i19;
+import 'package:core/data/models/tv_table.dart' as _i21;
+import 'package:core/domain/entities/movie.dart' as _i9;
+import 'package:core/domain/entities/movie_detail.dart' as _i10;
+import 'package:core/domain/entities/tv.dart' as _i16;
+import 'package:core/domain/entities/tv_detail.dart' as _i17;
+import 'package:core/domain/repositories/movie_repository.dart' as _i6;
+import 'package:core/domain/repositories/tv_repository.dart' as _i15;
 import 'package:dartz/dartz.dart' as _i2;
-import 'package:ditonton/common/failure.dart' as _i8;
-import 'package:ditonton/common/network_info.dart' as _i24;
-import 'package:ditonton/data/datasources/db/database_helper.dart' as _i22;
-import 'package:ditonton/data/datasources/movie_local_data_source.dart' as _i13;
-import 'package:ditonton/data/datasources/movie_remote_data_source.dart'
-    as _i11;
-import 'package:ditonton/data/datasources/tv_local_data_source.dart' as _i20;
-import 'package:ditonton/data/datasources/tv_remote_data_source.dart' as _i18;
-import 'package:ditonton/data/models/movie_detail_model.dart' as _i3;
-import 'package:ditonton/data/models/movie_model.dart' as _i12;
-import 'package:ditonton/data/models/movie_table.dart' as _i14;
-import 'package:ditonton/data/models/tv_detail_model.dart' as _i4;
-import 'package:ditonton/data/models/tv_model.dart' as _i19;
-import 'package:ditonton/data/models/tv_table.dart' as _i21;
-import 'package:ditonton/domain/entities/movie.dart' as _i9;
-import 'package:ditonton/domain/entities/movie_detail.dart' as _i10;
-import 'package:ditonton/domain/entities/tv.dart' as _i16;
-import 'package:ditonton/domain/entities/tv_detail.dart' as _i17;
-import 'package:ditonton/domain/repositories/movie_repository.dart' as _i6;
-import 'package:ditonton/domain/repositories/tv_repository.dart' as _i15;
 import 'package:http/http.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:sqflite/sqflite.dart' as _i23;
@@ -494,7 +492,7 @@ class MockDatabaseHelper extends _i1.Mock implements _i22.DatabaseHelper {
 /// A class which mocks [NetworkInfo].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNetworkInfo extends _i1.Mock implements _i24.NetworkInfo {
+class MockNetworkInfo extends _i1.Mock implements _i8.NetworkInfo {
   MockNetworkInfo() {
     _i1.throwOnMissingStub(this);
   }
@@ -529,7 +527,7 @@ class MockHttpClient extends _i1.Mock implements _i5.Client {
   _i7.Future<_i5.Response> post(Uri? url,
           {Map<String, String>? headers,
           Object? body,
-          _i25.Encoding? encoding}) =>
+          _i24.Encoding? encoding}) =>
       (super
           .noSuchMethod(Invocation.method(#post, [url], {#headers: headers, #body: body, #encoding: encoding}),
               returnValue: _i7.Future<_i5.Response>.value(_FakeResponse_3(
@@ -545,7 +543,7 @@ class MockHttpClient extends _i1.Mock implements _i5.Client {
   _i7.Future<_i5.Response> put(Uri? url,
           {Map<String, String>? headers,
           Object? body,
-          _i25.Encoding? encoding}) =>
+          _i24.Encoding? encoding}) =>
       (super
           .noSuchMethod(Invocation.method(#put, [url], {#headers: headers, #body: body, #encoding: encoding}),
               returnValue: _i7.Future<_i5.Response>.value(_FakeResponse_3(
@@ -561,7 +559,7 @@ class MockHttpClient extends _i1.Mock implements _i5.Client {
   _i7.Future<_i5.Response> patch(Uri? url,
           {Map<String, String>? headers,
           Object? body,
-          _i25.Encoding? encoding}) =>
+          _i24.Encoding? encoding}) =>
       (super
           .noSuchMethod(Invocation.method(#patch, [url], {#headers: headers, #body: body, #encoding: encoding}),
               returnValue: _i7.Future<_i5.Response>.value(_FakeResponse_3(
@@ -577,7 +575,7 @@ class MockHttpClient extends _i1.Mock implements _i5.Client {
   _i7.Future<_i5.Response> delete(Uri? url,
           {Map<String, String>? headers,
           Object? body,
-          _i25.Encoding? encoding}) =>
+          _i24.Encoding? encoding}) =>
       (super
           .noSuchMethod(Invocation.method(#delete, [url], {#headers: headers, #body: body, #encoding: encoding}),
               returnValue: _i7.Future<_i5.Response>.value(_FakeResponse_3(
@@ -594,12 +592,12 @@ class MockHttpClient extends _i1.Mock implements _i5.Client {
       (super.noSuchMethod(Invocation.method(#read, [url], {#headers: headers}),
           returnValue: _i7.Future<String>.value('')) as _i7.Future<String>);
   @override
-  _i7.Future<_i26.Uint8List> readBytes(Uri? url,
+  _i7.Future<_i25.Uint8List> readBytes(Uri? url,
           {Map<String, String>? headers}) =>
       (super.noSuchMethod(
               Invocation.method(#readBytes, [url], {#headers: headers}),
-              returnValue: _i7.Future<_i26.Uint8List>.value(_i26.Uint8List(0)))
-          as _i7.Future<_i26.Uint8List>);
+              returnValue: _i7.Future<_i25.Uint8List>.value(_i25.Uint8List(0)))
+          as _i7.Future<_i25.Uint8List>);
   @override
   _i7.Future<_i5.StreamedResponse> send(_i5.BaseRequest? request) =>
       (super.noSuchMethod(Invocation.method(#send, [request]),
