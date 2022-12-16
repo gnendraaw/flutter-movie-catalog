@@ -1,12 +1,13 @@
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/domain/entities/tv.dart';
-import 'package:ditonton/presentation/pages/top_rated_tvs_page.dart';
+import 'package:core/core.dart';
+import 'package:core/domain/entities/tv.dart';
+import 'package:core/presentation/pages/top_rated_tvs_page.dart';
+import 'package:core/presentation/provider/top_rated_tvs_notifier.dart';
 import 'package:flutter/material.dart';
-import 'package:ditonton/presentation/provider/top_rated_tvs_notifier.dart';
 import 'package:mockito/annotations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
+
 import 'top_rated_tvs_page_test.mocks.dart';
 
 @GenerateMocks([TopRatedTvsNotifier])

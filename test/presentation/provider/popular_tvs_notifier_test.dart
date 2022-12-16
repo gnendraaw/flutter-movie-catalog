@@ -1,14 +1,13 @@
+import 'package:core/core.dart';
+import 'package:core/domain/entities/tv.dart';
+import 'package:core/domain/usecases/get_popular_tvs.dart';
+import 'package:core/presentation/provider/popular_tvs_notifier.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/common/failure.dart';
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/domain/entities/tv.dart';
-import 'package:ditonton/domain/usecases/get_popular_tvs.dart';
-import 'package:ditonton/presentation/provider/popular_tvs_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import 'tv_list_notifier_test.mocks.dart';
+import 'popular_tvs_notifier_test.mocks.dart';
 
 @GenerateMocks([GetPopularTvs])
 void main() {
