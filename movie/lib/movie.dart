@@ -13,6 +13,7 @@ export 'presentation/provider/top_rated_movies_notifier.dart';
 export 'presentation/provider/watchlist_movie_notifier.dart';
 export 'presentation/bloc/movie_now_playing_bloc.dart';
 export 'presentation/bloc/movie_popular_bloc.dart';
+export 'presentation/bloc/movie_top_rated_bloc.dart';
 
 export 'domain/usecases/get_movie_detail.dart';
 export 'domain/usecases/get_movie_recommendations.dart';

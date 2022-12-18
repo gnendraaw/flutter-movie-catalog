@@ -128,6 +128,11 @@ void init() {
       locator(),
     ),
   );
+  locator.registerFactory(
+    () => MovieTopRatedBloc(
+      locator(),
+    ),
+  );
 
   // use case
   locator.registerLazySingleton(() => GetNowPlayingMovies(locator()));

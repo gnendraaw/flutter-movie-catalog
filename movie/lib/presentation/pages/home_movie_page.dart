@@ -18,13 +18,9 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
   @override
   void initState() {
     super.initState();
-    // Future.microtask(
-    //     () => Provider.of<MovieListNotifier>(context, listen: false)
-    //       ..fetchNowPlayingMovies()
-    //       ..fetchPopularMovies()
-    //       ..fetchTopRatedMovies());
     context.read<MovieNowPlayingBloc>().add(FetchNowPlayingMovies());
     context.read<MoviePopularBloc>().add(FetchPopularMovies());
+    context.read<MovieTopRatedBloc>().add(FetchMovieTopRated());
   }
 
   @override
@@ -147,6 +143,22 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                   context,
                   TOP_RATED_ROUTE,
                 ),
+              ),
+              BlocBuilder<MovieTopRatedBloc, MovieTopRatedState>(
+                builder: (context, state) {
+                  if (state is MovieTopRatedLoading) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (state is MovieTopRatedLoaded) {
+                    final result = state.result;
+                    return MovieList(result);
+                  } else if (state is MovieTopRatedError) {
+                    return Text('Failed');
+                  } else {
+                    return Container();
+                  }
+                },
               ),
             ],
           ),
