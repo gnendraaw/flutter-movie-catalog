@@ -1,4 +1,4 @@
-import 'package:core/domain/usecases/save_watchlist.dart';
+import 'package:movie/domain/usecases/save_watchlist.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';

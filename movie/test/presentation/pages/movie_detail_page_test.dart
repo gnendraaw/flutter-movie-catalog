@@ -1,12 +1,11 @@
 import 'package:core/core.dart';
-import 'package:core/domain/entities/movie.dart';
-import 'package:core/presentation/pages/movie_detail_page.dart';
-import 'package:core/presentation/provider/movie_detail_notifier.dart';
+import 'package:movie/domain/entities/movie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
+import 'package:movie/movie.dart';
 
 import '../../dummy_data/dummy_objects.dart';
 import 'movie_detail_page_test.mocks.dart';
