@@ -5,7 +5,7 @@ import 'package:core/presentation/pages/on_air_tv_page.dart';
 import 'package:core/presentation/pages/popular_tv_page.dart';
 import 'package:core/presentation/pages/top_rated_tvs_page.dart';
 import 'package:core/presentation/pages/tv_detail_page.dart';
-import 'package:core/presentation/pages/watchlist_movies_page.dart';
+import 'package:movie/presentation/pages/watchlist_movies_page.dart';
 import 'package:core/presentation/pages/watchlist_tvs_page.dart';
 import 'package:core/presentation/provider/tv_list_notifier.dart';
 import 'package:flutter/material.dart';

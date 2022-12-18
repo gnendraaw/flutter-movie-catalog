@@ -1,35 +1,36 @@
 import 'package:core/core.dart';
 import 'package:movie/domain/entities/movie.dart';
+import 'package:movie/domain/usecases/get_top_rated_movies.dart';
 import 'package:flutter/foundation.dart';
-import 'package:search/domain/usecase/search_movies.dart';
 
-class MovieSearchNotifier extends ChangeNotifier {
-  final SearchMovies searchMovies;
+class TopRatedMoviesNotifier extends ChangeNotifier {
+  final GetTopRatedMovies getTopRatedMovies;
 
-  MovieSearchNotifier({required this.searchMovies});
+  TopRatedMoviesNotifier({required this.getTopRatedMovies});
 
   RequestState _state = RequestState.Empty;
   RequestState get state => _state;
 
-  List<Movie> _searchResult = [];
-  List<Movie> get searchResult => _searchResult;
+  List<Movie> _movies = [];
+  List<Movie> get movies => _movies;
 
   String _message = '';
   String get message => _message;
 
-  Future<void> fetchMovieSearch(String query) async {
+  Future<void> fetchTopRatedMovies() async {
     _state = RequestState.Loading;
     notifyListeners();
 
-    final result = await searchMovies.execute(query);
+    final result = await getTopRatedMovies.execute();
+
     result.fold(
       (failure) {
         _message = failure.message;
         _state = RequestState.Error;
         notifyListeners();
       },
-      (data) {
-        _searchResult = data;
+      (moviesData) {
+        _movies = moviesData;
         _state = RequestState.Loaded;
         notifyListeners();
       },
