@@ -2,7 +2,6 @@ import 'package:movie/data/datasources/movie_local_data_source.dart';
 import 'package:movie/data/datasources/movie_remote_data_source.dart';
 import 'package:movie/data/repositories/movie_repository_impl.dart';
 import 'package:movie/domain/repositories/movie_repository.dart';
-import 'package:movie/domain/usecases/get_popular_movies.dart';
 import 'package:search/presentation/bloc/search_bloc.dart';
 import 'package:search/search.dart';
 import 'package:core/core.dart';
@@ -116,6 +115,16 @@ void init() {
   // bloc
   locator.registerFactory(
     () => SearchBloc(
+      locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => MovieNowPlayingBloc(
+      getNowPlayingMovies: locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => MoviePopularBloc(
       locator(),
     ),
   );

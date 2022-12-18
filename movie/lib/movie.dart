@@ -11,11 +11,14 @@ export 'presentation/provider/movie_list_notifier.dart';
 export 'presentation/provider/popular_movies_notifier.dart';
 export 'presentation/provider/top_rated_movies_notifier.dart';
 export 'presentation/provider/watchlist_movie_notifier.dart';
+export 'presentation/bloc/movie_now_playing_bloc.dart';
+export 'presentation/bloc/movie_popular_bloc.dart';
 
 export 'domain/usecases/get_movie_detail.dart';
 export 'domain/usecases/get_movie_recommendations.dart';
 
 export 'domain/usecases/get_now_playing_movies.dart';
+export 'domain/usecases/get_popular_movies.dart';
 export 'domain/usecases/get_top_rated_movies.dart';
 export 'domain/usecases/get_watchlist_movies.dart';
 export 'domain/usecases/get_watchlist_movies.dart';
