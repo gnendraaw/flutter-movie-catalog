@@ -1,3 +1,6 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:search/search.dart';
+import 'package:search/presentation/bloc/search_bloc.dart';
 import 'package:about/about.dart';
 import 'package:core/core.dart';
 import 'package:core/presentation/pages/home_movie_page.dart';
@@ -6,8 +9,6 @@ import 'package:core/presentation/pages/movie_detail_page.dart';
 import 'package:core/presentation/pages/on_air_tv_page.dart';
 import 'package:core/presentation/pages/popular_movies_page.dart';
 import 'package:core/presentation/pages/popular_tv_page.dart';
-import 'package:core/presentation/pages/search_page.dart';
-import 'package:core/presentation/pages/search_tv_page.dart';
 import 'package:core/presentation/pages/top_rated_movies_page.dart';
 import 'package:core/presentation/pages/top_rated_tvs_page.dart';
 import 'package:core/presentation/pages/tv_detail_page.dart';
@@ -15,14 +16,12 @@ import 'package:core/presentation/pages/watchlist_movies_page.dart';
 import 'package:core/presentation/pages/watchlist_tvs_page.dart';
 import 'package:core/presentation/provider/movie_detail_notifier.dart';
 import 'package:core/presentation/provider/movie_list_notifier.dart';
-import 'package:core/presentation/provider/movie_search_notifier.dart';
 import 'package:core/presentation/provider/top_rated_movies_notifier.dart';
 import 'package:core/presentation/provider/on_air_tvs_notifier.dart';
 import 'package:core/presentation/provider/popular_movies_notifier.dart';
 import 'package:core/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:core/presentation/provider/tv_list_notifier.dart';
 import 'package:core/presentation/provider/tv_detail_notifier.dart';
-import 'package:core/presentation/provider/tv_search_notifier.dart';
 import 'package:core/presentation/provider/top_rated_tvs_notifier.dart';
 import 'package:core/presentation/provider/popular_tvs_notifier.dart';
 import 'package:core/presentation/provider/watchlist_tv_notifier.dart';
@@ -79,6 +78,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<OnAirTvsNotifier>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<SearchBloc>(),
         ),
       ],
       child: MaterialApp(

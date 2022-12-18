@@ -1,3 +1,5 @@
+import 'package:search/presentation/bloc/search_bloc.dart';
+import 'package:search/search.dart';
 import 'package:core/core.dart';
 import 'package:core/data/datasources/db/database_helper.dart';
 import 'package:core/data/datasources/movie_local_data_source.dart';
@@ -26,11 +28,8 @@ import 'package:core/domain/usecases/remove_watchlist.dart';
 import 'package:core/domain/usecases/remove_watchlist_tv.dart';
 import 'package:core/domain/usecases/save_watchlist.dart';
 import 'package:core/domain/usecases/save_watchlist_tv.dart';
-import 'package:core/domain/usecases/search_movies.dart';
-import 'package:core/domain/usecases/search_tvs.dart';
 import 'package:core/presentation/provider/movie_detail_notifier.dart';
 import 'package:core/presentation/provider/movie_list_notifier.dart';
-import 'package:core/presentation/provider/movie_search_notifier.dart';
 import 'package:core/presentation/provider/on_air_tvs_notifier.dart';
 import 'package:core/presentation/provider/popular_movies_notifier.dart';
 import 'package:core/presentation/provider/popular_tvs_notifier.dart';
@@ -38,7 +37,6 @@ import 'package:core/presentation/provider/top_rated_movies_notifier.dart';
 import 'package:core/presentation/provider/top_rated_tvs_notifier.dart';
 import 'package:core/presentation/provider/tv_detail_notifier.dart';
 import 'package:core/presentation/provider/tv_list_notifier.dart';
-import 'package:core/presentation/provider/tv_search_notifier.dart';
 import 'package:core/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:core/presentation/provider/watchlist_tv_notifier.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
@@ -123,6 +121,13 @@ void init() {
   );
   locator.registerFactory(
     () => OnAirTvsNotifier(
+      locator(),
+    ),
+  );
+
+  // bloc
+  locator.registerFactory(
+    () => SearchBloc(
       locator(),
     ),
   );
