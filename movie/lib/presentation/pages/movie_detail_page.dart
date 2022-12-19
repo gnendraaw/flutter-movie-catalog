@@ -30,7 +30,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
     context.read<MovieRecommendationsBloc>().add(
           FetchMovieRecommendations(widget.id),
         );
-    context.read<MovieWatchlistBloc>().add(
+    context.read<MovieWatchlistStatusBloc>().add(
           GetMovieWatchlistStatus(widget.id),
         );
   }
@@ -55,26 +55,6 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
           }
         },
       ),
-      // body: Consumer<MovieDetailNotifier>(
-      //   builder: (context, provider, child) {
-      //     if (provider.movieState == RequestState.Loading) {
-      //       return Center(
-      //         child: CircularProgressIndicator(),
-      //       );
-      //     } else if (provider.movieState == RequestState.Loaded) {
-      //       final movie = provider.movie;
-      //       return SafeArea(
-      //         child: DetailContent(
-      //           movie,
-      //           provider.movieRecommendations,
-      //           provider.isAddedToWatchlist,
-      //         ),
-      //       );
-      //     } else {
-      //       return Text(provider.message);
-      //     }
-      //   },
-      // ),
     );
   }
 }
@@ -127,71 +107,52 @@ class DetailContent extends StatelessWidget {
                               movie.title,
                               style: kHeading5,
                             ),
-                            BlocBuilder<MovieWatchlistBloc,
-                                MovieWatchlistState>(
+                            BlocBuilder<MovieWatchlistStatusBloc,
+                                MovieWatchlistStatusState>(
                               builder: (context, state) {
-                                if (state is MovieWatchlistStatusLoaded) {
-                                  isAddedWatchlist = state.isAddedToWatchlist;
-                                  return ElevatedButton(
-                                    onPressed: () async {
-                                      context.read<MovieWatchlistBloc>().add(
-                                          isAddedWatchlist
-                                              ? RemoveMovieWatchlist(movie)
-                                              : AddMovieWatchlist(movie));
+                                isAddedWatchlist = state.isAddedWatchlist;
+                                return ElevatedButton(
+                                  onPressed: () {
+                                    if (isAddedWatchlist) {
+                                      context
+                                          .read<MovieWatchlistStatusBloc>()
+                                          .add(RemoveMovieWatchlist(movie));
+                                    } else {
+                                      context
+                                          .read<MovieWatchlistStatusBloc>()
+                                          .add(SaveMovieWatchlist(movie));
+                                    }
+
+                                    if (state.requestState ==
+                                        RequestState.Loaded) {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(SnackBar(
-                                        content: Text(state.message),
+                                        content: Text(isAddedWatchlist
+                                            ? 'Removed from Watchlist'
+                                            : 'Added to Watchlist'),
                                       ));
-                                    },
-                                    child: Row(
-                                      children: [
-                                        Icon(isAddedWatchlist
-                                            ? Icons.check
-                                            : Icons.add),
-                                        Text('Watchlist')
-                                      ],
-                                    ),
-                                  );
-                                } else {
-                                  return Container();
-                                }
+                                    } else if (state.requestState ==
+                                        RequestState.Error) {
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) => AlertDialog(
+                                          content: Text(state.message),
+                                        ),
+                                      );
+                                    }
+                                  },
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      isAddedWatchlist
+                                          ? Icon(Icons.check)
+                                          : Icon(Icons.add),
+                                      Text('Watchlist'),
+                                    ],
+                                  ),
+                                );
                               },
                             ),
-                            // ElevatedButton(
-                            //   onPressed: () async {
-                            //     final message =
-                            //         Provider.of<MovieDetailNotifier>(context,
-                            //                 listen: false)
-                            //             .watchlistMessage;
-
-                            //     if (message ==
-                            //             MovieDetailNotifier
-                            //                 .watchlistAddSuccessMessage ||
-                            //         message ==
-                            //             MovieDetailNotifier
-                            //                 .watchlistRemoveSuccessMessage) {
-                            //       ScaffoldMessenger.of(context).showSnackBar(
-                            //           SnackBar(content: Text(message)));
-                            //     } else {
-                            //       showDialog(
-                            //           context: context,
-                            //           builder: (context) {
-                            //             return AlertDialog(
-                            //               content: Text(message),
-                            //             );
-                            //           });
-                            //     }
-                            //   },
-                            //   child: Row(
-                            //     mainAxisSize: MainAxisSize.min,
-                            //     children: [
-                            //       isAddedWatchlist
-                            //           ? Icon(Icons.check)
-                            //           : Icon(Icons.add),
-                            //       Text('Watchlist'),
-                            //     ],
-                            //   ),
-                            // ),
                             Text(
                               _showGenres(movie.genres),
                             ),

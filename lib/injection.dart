@@ -140,15 +140,14 @@ void init() {
     ),
   );
   locator.registerFactory(
-    () => MovieWatchlistBloc(
-      getWatchListStatus: locator(),
-      getWatchlistMovies: locator(),
-      removeWatchlist: locator(),
-      saveWatchlist: locator(),
+    () => MovieRecommendationsBloc(
+      locator(),
     ),
   );
   locator.registerFactory(
-    () => MovieRecommendationsBloc(
+    () => MovieWatchlistStatusBloc(
+      locator(),
+      locator(),
       locator(),
     ),
   );
