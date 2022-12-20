@@ -4,7 +4,6 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/domain/entities/movie.dart';
 import 'package:movie/movie.dart';
-import 'package:core/presentation/pages/watchlist_tvs_page.dart';
 import 'package:flutter/material.dart';
 
 class HomeMoviePage extends StatefulWidget {
@@ -56,14 +55,14 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               leading: Icon(Icons.save_alt),
               title: Text('Movie Watchlist'),
               onTap: () {
-                Navigator.pushNamed(context, WatchlistMoviesPage.ROUTE_NAME);
+                Navigator.pushNamed(context, WATCHLIST_MOVIE_ROUTE);
               },
             ),
             ListTile(
                 leading: Icon(Icons.save_alt),
                 title: Text('TV Watchlist'),
                 onTap: () {
-                  Navigator.pushNamed(context, WatchlistTvsPage.ROUTE_NAME);
+                  Navigator.pushNamed(context, WATCHLIST_TV_ROUTE);
                 }),
             ListTile(
               onTap: () {

@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:core/data/models/tv_table.dart';
+import 'package:tv/data/models/tv_table.dart';
 import 'package:movie/data/models/movie_table.dart';
 import 'package:sqflite/sqflite.dart';
 

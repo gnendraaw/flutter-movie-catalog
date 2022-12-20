@@ -1,7 +1,6 @@
 import 'package:core/core.dart';
-import 'package:core/presentation/widgets/tv_card_list.dart';
+import 'package:tv/presentation/widgets/tv_card_list.dart';
 import 'package:provider/provider.dart';
-import 'package:search/presentation/provider/tv_search_notifier.dart';
 import 'package:flutter/material.dart';
 
 class SearchTvPage extends StatelessWidget {
@@ -18,48 +17,48 @@ class SearchTvPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextField(
-              onSubmitted: (query) {
-                Provider.of<TvSearchNotifier>(context, listen: false)
-                    .fetchSearchTvs(query);
-              },
-              decoration: InputDecoration(
-                hintText: 'Search title',
-                prefixIcon: Icon(Icons.search),
-                border: OutlineInputBorder(),
-              ),
-              textInputAction: TextInputAction.search,
-            ),
+            // TextField(
+            //   onSubmitted: (query) {
+            //     Provider.of<TvSearchNotifier>(context, listen: false)
+            //         .fetchSearchTvs(query);
+            //   },
+            //   decoration: InputDecoration(
+            //     hintText: 'Search title',
+            //     prefixIcon: Icon(Icons.search),
+            //     border: OutlineInputBorder(),
+            //   ),
+            //   textInputAction: TextInputAction.search,
+            // ),
             SizedBox(height: 16),
             Text(
               'Search Result',
               style: kHeading6,
             ),
-            Consumer<TvSearchNotifier>(
-              builder: (contxt, data, child) {
-                if (data.state == RequestState.Loading) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (data.state == RequestState.Loaded) {
-                  final result = data.searchResult;
-                  return Expanded(
-                    child: ListView.builder(
-                      padding: const EdgeInsets.all(8),
-                      itemBuilder: (context, index) {
-                        final tv = result[index];
-                        return TvCard(tv);
-                      },
-                      itemCount: data.searchResult.length,
-                    ),
-                  );
-                } else {
-                  return Expanded(
-                    child: Container(),
-                  );
-                }
-              },
-            ),
+            // Consumer<TvSearchNotifier>(
+            //   builder: (contxt, data, child) {
+            //     if (data.state == RequestState.Loading) {
+            //       return Center(
+            //         child: CircularProgressIndicator(),
+            //       );
+            //     } else if (data.state == RequestState.Loaded) {
+            //       final result = data.searchResult;
+            //       return Expanded(
+            //         child: ListView.builder(
+            //           padding: const EdgeInsets.all(8),
+            //           itemBuilder: (context, index) {
+            //             final tv = result[index];
+            //             return TvCard(tv);
+            //           },
+            //           itemCount: data.searchResult.length,
+            //         ),
+            //       );
+            //     } else {
+            //       return Expanded(
+            //         child: Container(),
+            //       );
+            //     }
+            //   },
+            // ),
           ],
         ),
       ),

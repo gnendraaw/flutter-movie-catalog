@@ -3,12 +3,12 @@ import 'package:tv/domain/entities/tv.dart';
 import 'package:tv/domain/repositories/tv_repository.dart';
 import 'package:dartz/dartz.dart';
 
-class SearchTvs {
+class GetTopRatedTvs {
   final TvRepository repository;
 
-  SearchTvs(this.repository);
+  GetTopRatedTvs(this.repository);
 
-  Future<Either<Failure, List<Tv>>> execute(String query) {
-    return repository.searchTvs(query);
+  Future<Either<Failure, List<Tv>>> execute() async {
+    return repository.getTopRatedTv();
   }
 }

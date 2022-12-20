@@ -1,9 +1,9 @@
-import 'package:core/presentation/pages/home_tv_page.dart';
-import 'package:core/presentation/pages/on_air_tv_page.dart';
-import 'package:core/presentation/pages/popular_tv_page.dart';
-import 'package:core/presentation/pages/top_rated_tvs_page.dart';
-import 'package:core/presentation/pages/tv_detail_page.dart';
-import 'package:core/presentation/pages/watchlist_tvs_page.dart';
+import 'package:tv/presentation/pages/home_tv_page.dart';
+import 'package:tv/presentation/pages/on_air_tv_page.dart';
+import 'package:tv/presentation/pages/popular_tv_page.dart';
+import 'package:tv/presentation/pages/top_rated_tvs_page.dart';
+import 'package:tv/presentation/pages/tv_detail_page.dart';
+import 'package:tv/presentation/pages/watchlist_tvs_page.dart';
 import 'package:ditonton/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -51,9 +51,6 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<TopRatedTvsNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvSearchNotifier>(),
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<OnAirTvsNotifier>(),

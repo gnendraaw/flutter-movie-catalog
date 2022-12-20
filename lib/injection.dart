@@ -6,19 +6,19 @@ import 'package:search/presentation/bloc/search_bloc.dart';
 import 'package:search/search.dart';
 import 'package:core/core.dart';
 import 'package:core/data/datasources/db/database_helper.dart';
-import 'package:core/data/datasources/tv_local_data_source.dart';
-import 'package:core/data/datasources/tv_remote_data_source.dart';
-import 'package:core/data/repositories/tv_repository_impl.dart';
-import 'package:core/domain/repositories/tv_repository.dart';
-import 'package:core/domain/usecases/get_popular_tvs.dart';
-import 'package:core/domain/usecases/get_top_rated_tvs.dart';
-import 'package:core/domain/usecases/get_tv_detail.dart';
-import 'package:core/domain/usecases/get_tv_on_air.dart';
-import 'package:core/domain/usecases/get_tv_recommendations.dart';
-import 'package:core/domain/usecases/get_watchlist_tv_status.dart';
-import 'package:core/domain/usecases/get_watchlist_tvs.dart';
-import 'package:core/domain/usecases/remove_watchlist_tv.dart';
-import 'package:core/domain/usecases/save_watchlist_tv.dart';
+import 'package:tv/data/datasources/tv_local_data_source.dart';
+import 'package:tv/data/datasources/tv_remote_data_source.dart';
+import 'package:tv/data/repositories/tv_repository_impl.dart';
+import 'package:tv/domain/repositories/tv_repository.dart';
+import 'package:tv/domain/usecases/get_popular_tvs.dart';
+import 'package:tv/domain/usecases/get_top_rated_tvs.dart';
+import 'package:tv/domain/usecases/get_tv_detail.dart';
+import 'package:tv/domain/usecases/get_tv_on_air.dart';
+import 'package:tv/domain/usecases/get_tv_recommendations.dart';
+import 'package:tv/domain/usecases/get_watchlist_tv_status.dart';
+import 'package:tv/domain/usecases/get_watchlist_tvs.dart';
+import 'package:tv/domain/usecases/remove_watchlist_tv.dart';
+import 'package:tv/domain/usecases/save_watchlist_tv.dart';
 import 'package:core/presentation/provider/on_air_tvs_notifier.dart';
 import 'package:core/presentation/provider/popular_tvs_notifier.dart';
 import 'package:core/presentation/provider/top_rated_tvs_notifier.dart';
@@ -34,11 +34,6 @@ final locator = GetIt.instance;
 
 void init() {
   // provider
-  locator.registerFactory(
-    () => MovieSearchNotifier(
-      searchMovies: locator(),
-    ),
-  );
   locator.registerFactory(
     () => TvListNotifier(
       getTvOnAir: locator(),
@@ -67,11 +62,6 @@ void init() {
   );
   locator.registerFactory(
     () => PopularTvsNotifier(
-      locator(),
-    ),
-  );
-  locator.registerFactory(
-    () => TvSearchNotifier(
       locator(),
     ),
   );

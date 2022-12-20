@@ -1,33 +1,43 @@
-name: search
+name: tv
 description: A new Flutter package project.
 version: 0.0.1
 homepage:
 
 environment:
-  sdk: '>=2.18.5 <3.0.0'
+  sdk: '>=2.18.6 <3.0.0'
   flutter: ">=1.17.0"
 
 dependencies:
-  flutter:
-    sdk: flutter
-  provider: ^6.0.3
-  dartz: ^0.10.0-nullsafety.2
   core:
     path: ../core
-  movie:
-    path: ../movie
-  tv:
-    path: ../tv
+  search:
+    path: ../search
+  dartz: ^0.10.1
+  http: ^0.13.3
+  equatable: ^2.0.5
+  flutter:
+    sdk: flutter
   flutter_bloc: ^8.1.1
-  rxdart: ^0.27.7
+  provider: ^6.0.5
+  google_fonts: ^3.0.1
+  flutter_rating_bar: ^4.0.0
+  cached_network_image: ^3.0.0
+  sqflite: ^2.2.2
+  cupertino_icons: ^1.0.2
+  data_connection_checker:
+    git:
+      url: https://github.com/chornthorn/data_connection_checker.git
+      ref: master
+  path_provider: ^2.0.11
+  firebase_crashlytics: ^3.0.7
 
 dev_dependencies:
-  mockito: ^5.0.8
-  build_runner: ^2.0.4
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
   bloc_test: ^9.1.0
+  mockito: ^5.3.2
+  build_runner: ^2.3.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -65,3 +75,4 @@ flutter:
   #
   # For details regarding fonts in packages, see
   # https://flutter.dev/custom-fonts/#from-packages
+
