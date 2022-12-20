@@ -12,6 +12,8 @@ dependencies:
     path: ../core
   search:
     path: ../search
+  tv:
+    path: ../tv
   dartz: ^0.10.1
   http: ^0.13.3
   equatable: ^2.0.5

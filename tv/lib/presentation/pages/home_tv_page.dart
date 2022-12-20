@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tv/domain/entities/tv.dart';
-import 'package:core/presentation/provider/tv_list_notifier.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:tv/presentation/bloc/on_air_tv_bloc.dart';
+import 'package:tv/presentation/bloc/popular_tv_bloc.dart';
+import 'package:tv/presentation/bloc/top_rated_tv_bloc.dart';
 
 class HomeTvPage extends StatefulWidget {
   static const ROUTE_NAME = '/home-tv';
@@ -16,10 +18,9 @@ class _HomeTvPageState extends State<HomeTvPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => Provider.of<TvListNotifier>(context, listen: false)
-      ..fetchTvOnAir()
-      ..fetchPopularTvs()
-      ..fetchTopRatedTvs());
+    context.read<OnAirTvBloc>().add(FetchOnAirTv());
+    context.read<PopularTvBloc>().add(FetchPopularTv());
+    context.read<TopRatedTvBloc>().add(FetchTopRatedTv());
   }
 
   @override
@@ -115,20 +116,21 @@ class _HomeTvPageState extends State<HomeTvPage> {
                   );
                 },
               ),
-              // Consumer<TvListNotifier>(
-              //   builder: (context, data, child) {
-              //     final state = data.onAirState;
-              //     if (state == RequestState.Loading) {
-              //       return Center(
-              //         child: CircularProgressIndicator(),
-              //       );
-              //     } else if (state == RequestState.Loaded) {
-              //       return TvList(data.tvOnAir);
-              //     } else {
-              //       return Text('Failed');
-              //     }
-              //   },
-              // ),
+              BlocBuilder<OnAirTvBloc, OnAirTvState>(
+                builder: (context, state) {
+                  if (state is OnAirTvLoading) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (state is OnAirTvLoaded) {
+                    return TvList(state.result);
+                  } else if (state is OnAirTvError) {
+                    return Text('Failed');
+                  } else {
+                    return Container();
+                  }
+                },
+              ),
               _buildSubHeading(
                 title: 'Popular',
                 onTap: () {
@@ -138,20 +140,21 @@ class _HomeTvPageState extends State<HomeTvPage> {
                   );
                 },
               ),
-              // Consumer<TvListNotifier>(
-              //   builder: (context, data, child) {
-              //     final state = data.popularTvsState;
-              //     if (state == RequestState.Loading) {
-              //       return Center(
-              //         child: CircularProgressIndicator(),
-              //       );
-              //     } else if (state == RequestState.Loaded) {
-              //       return TvList(data.popularTvs);
-              //     } else {
-              //       return Text('Failed');
-              //     }
-              //   },
-              // ),
+              BlocBuilder<PopularTvBloc, PopularTvState>(
+                builder: (context, state) {
+                  if (state is PopularTvLoading) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (state is PopularTvLoaded) {
+                    return TvList(state.result);
+                  } else if (state is PopularTvError) {
+                    return Text('Failed');
+                  } else {
+                    return Container();
+                  }
+                },
+              ),
               _buildSubHeading(
                 title: 'Top Rated',
                 onTap: () {
@@ -161,20 +164,21 @@ class _HomeTvPageState extends State<HomeTvPage> {
                   );
                 },
               ),
-              // Consumer<TvListNotifier>(
-              //   builder: (context, data, child) {
-              //     final state = data.topRatedState;
-              //     if (state == RequestState.Loading) {
-              //       return Center(
-              //         child: CircularProgressIndicator(),
-              //       );
-              //     } else if (state == RequestState.Loaded) {
-              //       return TvList(data.topRatedTvs);
-              //     } else {
-              //       return Text('Failed');
-              //     }
-              //   },
-              // ),
+              BlocBuilder<TopRatedTvBloc, TopRatedTvState>(
+                builder: (context, state) {
+                  if (state is TopRatedTvLoading) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (state is TopRatedTvLoaded) {
+                    return TvList(state.result);
+                  } else if (state is TopRatedTvError) {
+                    return Text('Failed');
+                  } else {
+                    return Container();
+                  }
+                },
+              ),
             ],
           ),
         ),

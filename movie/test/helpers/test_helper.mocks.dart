@@ -9,7 +9,7 @@ import 'dart:typed_data' as _i18;
 
 import 'package:core/core.dart' as _i7;
 import 'package:core/data/datasources/db/database_helper.dart' as _i14;
-import 'package:core/data/models/tv_table.dart' as _i16;
+import 'package:tv/data/models/tv_table.dart' as _i16;
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:http/http.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
