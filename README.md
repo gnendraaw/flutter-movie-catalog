@@ -14,4 +14,4 @@
 
 # Build Result Screenshots
 <img src="screenshots/Ditonton-build-apk-home-page.png" alt="" width="300" height="500" />
-<img src="" alt="screenshots/Ditonton-build-apk-movie-detail.png" width="300" height="500" />
+<img src="screenshots/Ditonton-build-apk-movie-detail.png" alt="" width="300" height="500" />
