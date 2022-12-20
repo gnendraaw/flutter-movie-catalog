@@ -117,6 +117,12 @@ class DetailContent extends StatelessWidget {
                                         : context
                                             .read<TvWatchlistStatusBloc>()
                                             .add(RemoveTvWatchlist(tv));
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(SnackBar(
+                                      content: Text(!state.isAddedWatchlist
+                                          ? 'Added to Watchlist'
+                                          : 'Removed from Watchlist'),
+                                    ));
                                   },
                                   child: Row(
                                     mainAxisSize: MainAxisSize.min,
@@ -129,6 +135,12 @@ class DetailContent extends StatelessWidget {
                                   ),
                                 );
                               } else if (state is TvWatchlistStatusError) {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                    content: Text('Failed'),
+                                  ),
+                                );
                                 return Center(
                                   child: Text(state.message),
                                 );
