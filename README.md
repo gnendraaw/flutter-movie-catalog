@@ -13,5 +13,4 @@
 ![Ditonton build list](screenshots/Ditonton-ci-build-lists.png)
 
 # Build Result Screenshots
-![Home Page](screenshots/Ditonton-build-apk-home-page.png)
-![Movie Detail](screenshots/Ditonton-build-apk-movie-detail.png)
+<img src="screenshots\Ditonton-build-apk-movie-detail.png", alt="Home Page", width="200"/>
