@@ -15,3 +15,21 @@ class FetchMovieDetail extends MovieDetailEvent {
   @override
   List<Object?> get props => [id];
 }
+
+class SaveMovieWatchlist extends MovieDetailEvent {
+  final MovieDetail movie;
+
+  SaveMovieWatchlist(this.movie);
+
+  @override
+  List<Object?> get props => [movie];
+}
+
+class RemoveMovieWatchlist extends MovieDetailEvent {
+  final MovieDetail movie;
+
+  RemoveMovieWatchlist(this.movie);
+
+  @override
+  List<Object?> get props => [movie];
+}

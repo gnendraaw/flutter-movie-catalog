@@ -104,19 +104,14 @@ void init() {
   );
   locator.registerFactory(
     () => MovieDetailBloc(
-      getMovieDetail: locator(),
-      getMovieRecommendations: locator(),
+      locator(),
+      locator(),
+      locator(),
+      locator(),
     ),
   );
   locator.registerFactory(
     () => MovieRecommendationsBloc(
-      locator(),
-    ),
-  );
-  locator.registerFactory(
-    () => MovieWatchlistStatusBloc(
-      locator(),
-      locator(),
       locator(),
     ),
   );

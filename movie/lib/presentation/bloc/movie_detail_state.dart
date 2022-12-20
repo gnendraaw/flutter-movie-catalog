@@ -13,17 +13,28 @@ class MovieDetailLoading extends MovieDetailState {}
 
 class MovieDetailLoaded extends MovieDetailState {
   final MovieDetail movieDetail;
+  final bool isAddedWatchlist;
+  final String message;
 
-  MovieDetailLoaded(this.movieDetail);
+  MovieDetailLoaded(this.movieDetail, this.isAddedWatchlist, this.message);
 
   @override
-  List<Object?> get props => [movieDetail];
+  List<Object?> get props => [movieDetail, isAddedWatchlist, message];
 }
 
 class MovieDetailError extends MovieDetailState {
   final String message;
 
   MovieDetailError(this.message);
+
+  @override
+  List<Object?> get props => [message];
+}
+
+class MovieWatchlistStatusError extends MovieDetailState {
+  final String message;
+
+  MovieWatchlistStatusError(this.message);
 
   @override
   List<Object?> get props => [message];
