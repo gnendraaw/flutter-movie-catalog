@@ -29,6 +29,7 @@ dependencies:
       url: https://github.com/chornthorn/data_connection_checker.git
       ref: master
   path_provider: ^2.0.11
+  firebase_crashlytics: ^3.0.7
 
 dev_dependencies:
   flutter_test:

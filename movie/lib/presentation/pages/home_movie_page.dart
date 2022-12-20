@@ -1,13 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/domain/entities/movie.dart';
 import 'package:movie/movie.dart';
-import 'package:movie/presentation/pages/watchlist_movies_page.dart';
 import 'package:core/presentation/pages/watchlist_tvs_page.dart';
-import 'package:movie/presentation/provider/movie_list_notifier.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class HomeMoviePage extends StatefulWidget {
   @override
@@ -82,6 +80,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
         actions: [
           IconButton(
             onPressed: () {
+              FirebaseCrashlytics.instance.crash();
               Navigator.pushNamed(context, SEARCH_ROUTE);
             },
             icon: Icon(Icons.search),

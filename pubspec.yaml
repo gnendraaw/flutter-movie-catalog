@@ -37,6 +37,8 @@ dependencies:
   movie:
     path: movie
   flutter_bloc: ^8.1.1
+  firebase_core: ^2.1.1
+  firebase_crashlytics: ^3.0.7
 
 dev_dependencies:
   mockito: ^5.0.8

@@ -4,6 +4,8 @@ import 'package:core/presentation/pages/popular_tv_page.dart';
 import 'package:core/presentation/pages/top_rated_tvs_page.dart';
 import 'package:core/presentation/pages/tv_detail_page.dart';
 import 'package:core/presentation/pages/watchlist_tvs_page.dart';
+import 'package:ditonton/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:search/search.dart';
 import 'package:search/presentation/bloc/search_bloc.dart';
@@ -21,8 +23,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ditonton/injection.dart' as di;
 
-void main() {
+void main() async {
   di.init();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MyApp());
 }
 
