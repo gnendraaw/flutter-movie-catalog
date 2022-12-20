@@ -12,6 +12,7 @@ export 'presentation/bloc/movie_top_rated_bloc.dart';
 export 'presentation/bloc/movie_detail_bloc.dart';
 export 'presentation/bloc/movie_recommendations_bloc.dart';
 export 'presentation/bloc/movie_watchlist_bloc.dart';
+export 'presentation/bloc/movie_watchlist_status_bloc.dart';
 
 export 'domain/usecases/get_movie_detail.dart';
 export 'domain/usecases/get_movie_recommendations.dart';

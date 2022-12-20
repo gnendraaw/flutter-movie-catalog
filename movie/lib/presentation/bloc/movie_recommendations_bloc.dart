@@ -11,7 +11,7 @@ class MovieRecommendationsBloc
   final GetMovieRecommendations getMovieRecommendations;
 
   MovieRecommendationsBloc(this.getMovieRecommendations)
-      : super(MovieRecommendationsEmpty()) {
+      : super(MovieRecommendationsInitial()) {
     on<FetchMovieRecommendations>((event, emit) async {
       emit(MovieRecommendationsLoading());
       final result = await getMovieRecommendations.execute(event.id);

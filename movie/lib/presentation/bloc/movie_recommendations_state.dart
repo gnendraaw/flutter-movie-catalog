@@ -7,7 +7,7 @@ class MovieRecommendationsState extends Equatable {
   List<Object?> get props => [];
 }
 
-class MovieRecommendationsEmpty extends MovieRecommendationsState {}
+class MovieRecommendationsInitial extends MovieRecommendationsState {}
 
 class MovieRecommendationsLoading extends MovieRecommendationsState {}
 

@@ -7,7 +7,6 @@ import 'package:mockito/mockito.dart';
 import 'package:movie/domain/entities/movie.dart';
 import 'package:movie/movie.dart';
 
-import 'movie_popular_bloc_test.mocks.dart';
 import 'movie_top_rated_bloc_test.mocks.dart';
 
 @GenerateMocks([GetTopRatedMovies])

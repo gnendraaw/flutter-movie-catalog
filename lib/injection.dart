@@ -53,9 +53,6 @@ void init() {
   locator.registerFactory(
     () => MovieDetailBloc(
       locator(),
-      locator(),
-      locator(),
-      locator(),
     ),
   );
   locator.registerFactory(
@@ -65,6 +62,13 @@ void init() {
   );
   locator.registerFactory(
     () => MovieWatchlistBloc(
+      locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => MovieWatchlistStatusBloc(
+      locator(),
+      locator(),
       locator(),
     ),
   );

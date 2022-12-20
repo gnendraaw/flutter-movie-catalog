@@ -28,6 +28,9 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
     context.read<MovieRecommendationsBloc>().add(
           FetchMovieRecommendations(widget.id),
         );
+    context.read<MovieWatchlistStatusBloc>().add(
+          LoadMovieWatchlistStatus(widget.id),
+        );
   }
 
   @override
@@ -41,7 +44,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
             );
           } else if (state is MovieDetailLoaded) {
             return SafeArea(
-              child: DetailContent(state.movieDetail, state.isAddedWatchlist),
+              child: DetailContent(state.movieDetail),
             );
           } else if (state is MovieDetailError) {
             return Text(state.message);
@@ -56,10 +59,8 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
 
 class DetailContent extends StatelessWidget {
   final MovieDetail movie;
-  final bool isAddedWatchlist;
-  late List<Movie> recommendations;
 
-  DetailContent(this.movie, this.isAddedWatchlist);
+  DetailContent(this.movie);
 
   @override
   Widget build(BuildContext context) {
@@ -102,42 +103,52 @@ class DetailContent extends StatelessWidget {
                               movie.title,
                               style: kHeading5,
                             ),
-                            ElevatedButton(
-                                onPressed: () {
-                                  !isAddedWatchlist
-                                      ? context
-                                          .read<MovieDetailBloc>()
-                                          .add(SaveMovieWatchlist(movie))
-                                      : context
-                                          .read<MovieDetailBloc>()
-                                          .add(RemoveMovieWatchlist(movie));
+                            BlocBuilder<MovieWatchlistStatusBloc,
+                                MovieWatchlistStatusState>(
+                              builder: (context, state) {
+                                if (state is MovieWatchlistStatusLoaded) {
+                                  return ElevatedButton(
+                                    onPressed: () {
+                                      !state.isAddedWatchlist
+                                          ? context
+                                              .read<MovieWatchlistStatusBloc>()
+                                              .add(SaveMovieWatchlist(movie))
+                                          : context
+                                              .read<MovieWatchlistStatusBloc>()
+                                              .add(RemoveMovieWatchlist(movie));
 
-                                  final state =
-                                      context.read<MovieDetailBloc>().state;
-                                  if (state is MovieDetailLoaded) {
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(SnackBar(
-                                      content: Text(state.message),
-                                    ));
-                                  } else if (state
-                                      is MovieWatchlistStatusError) {
-                                    showDialog(
-                                      context: context,
-                                      builder: (context) => AlertDialog(
-                                        content: Text(state.message),
-                                      ),
-                                    );
-                                  }
-                                },
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    isAddedWatchlist
-                                        ? Icon(Icons.check)
-                                        : Icon(Icons.add),
-                                    Text('Watchlist'),
-                                  ],
-                                )),
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
+                                        content: Text(!state.isAddedWatchlist
+                                            ? 'Added to Watchlist'
+                                            : 'Removed from Watchlist'),
+                                      ));
+                                    },
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        state.isAddedWatchlist
+                                            ? Icon(Icons.check)
+                                            : Icon(Icons.add),
+                                        Text('Watchlist'),
+                                      ],
+                                    ),
+                                  );
+                                } else if (state is MovieWatchlistStatusError) {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                      content: Text('Failed'),
+                                    ),
+                                  );
+                                  return Center(
+                                    child: Text(state.message),
+                                  );
+                                } else {
+                                  return Container();
+                                }
+                              },
+                            ),
                             Text(
                               _showGenres(movie.genres),
                             ),

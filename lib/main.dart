@@ -1,7 +1,4 @@
 import 'package:search/presentation/bloc/tv_search_bloc.dart';
-import 'package:tv/presentation/bloc/on_air_tv_bloc.dart';
-import 'package:tv/presentation/bloc/popular_tv_bloc.dart';
-import 'package:tv/presentation/bloc/top_rated_tv_bloc.dart';
 import 'package:tv/presentation/pages/home_tv_page.dart';
 import 'package:tv/presentation/pages/on_air_tv_page.dart';
 import 'package:tv/presentation/pages/popular_tv_page.dart';
@@ -56,6 +53,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => di.locator<MovieWatchlistBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<MovieWatchlistStatusBloc>(),
         ),
         BlocProvider(
           create: (_) => di.locator<TvSearchBloc>(),
