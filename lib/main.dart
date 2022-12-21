@@ -20,11 +20,14 @@ import 'package:ditonton/injection.dart' as di;
 import 'package:tv/tv.dart';
 
 void main() async {
-  di.init();
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  di.init();
+
   runApp(MyApp());
 }
 

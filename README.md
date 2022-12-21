@@ -9,8 +9,9 @@
 ![Crashlytics Dashboard](screenshots/Ditonton-crashlytics-dashboard.png)
 ![Crashlytics Details](screenshots/Ditonton-crashlytics-detail.png)
 
-# Ditonton Codemagic Build List
+# Ditonton Codemagic Builds
 ![Ditonton build list](screenshots/Ditonton-ci-build-lists.png)
+![Ditonton build detail](screenshots/Ditonton-ci-build-detail.png)
 
 # Build Result Screenshots
 <img src="screenshots/Ditonton-build-apk-home-page.png" alt="" width="300" height="500" />

@@ -12,6 +12,8 @@ import '../../json_reader.dart';
 import '../../helpers/test_helper.mocks.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
   const API_KEY = 'api_key=2174d146bb9c0eab47529b2e77d6b526';
   const BASE_URL = 'https://api.themoviedb.org/3';
 
@@ -20,7 +22,7 @@ void main() {
 
   setUp(() {
     mockHttpClient = MockHttpClient();
-    dataSource = TvRemoteDataSourceImpl(client: mockHttpClient);
+    dataSource = TvRemoteDataSourceImpl();
   });
 
   group('Get TV On Air', () {
