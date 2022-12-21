@@ -47,7 +47,9 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
               child: DetailContent(state.movieDetail),
             );
           } else if (state is MovieDetailError) {
-            return Text(state.message);
+            return Center(
+              child: Text(state.message),
+            );
           } else {
             return Container();
           }

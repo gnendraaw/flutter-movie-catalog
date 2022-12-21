@@ -42,6 +42,15 @@ class SearchPage extends StatelessWidget {
                   );
                 } else if (state is SearchHasData) {
                   final result = state.result;
+
+                  if (result.isEmpty) {
+                    return Expanded(
+                      child: Center(
+                        child: Text('We found nothing :('),
+                      ),
+                    );
+                  }
+
                   return Expanded(
                     child: ListView.builder(
                       padding: const EdgeInsets.all(8),

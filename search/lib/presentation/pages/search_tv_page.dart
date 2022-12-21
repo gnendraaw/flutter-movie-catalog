@@ -44,8 +44,10 @@ class SearchTvPage extends StatelessWidget {
                   final result = state.result;
 
                   if (result.isEmpty)
-                    return Center(
-                      child: Text('We found nothing :('),
+                    return Expanded(
+                      child: Center(
+                        child: Text('We found nothing :('),
+                      ),
                     );
 
                   return Expanded(
@@ -59,8 +61,10 @@ class SearchTvPage extends StatelessWidget {
                     ),
                   );
                 } else if (state is TvSearchError) {
-                  return Center(
-                    child: Text(state.message),
+                  return Expanded(
+                    child: Center(
+                      child: Text(state.message),
+                    ),
                   );
                 } else {
                   return Expanded(
