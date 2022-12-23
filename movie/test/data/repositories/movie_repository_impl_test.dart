@@ -124,6 +124,18 @@ void main() {
         verify(mockRemoteDataSource.getNowPlayingMovies());
         expect(result, equals(Left(ServerFailure(''))));
       });
+
+      test('should return common failure when SSL Certificate is invalid',
+          () async {
+        // arrange
+        when(mockRemoteDataSource.getNowPlayingMovies())
+            .thenThrow(TlsException());
+        // act
+        final result = await repository.getNowPlayingMovies();
+        // assert
+        verify(mockRemoteDataSource.getNowPlayingMovies());
+        expect(result, equals(Left(CommonFailure('Invalid Certificate'))));
+      });
     });
 
     group('when device is offline', () {
@@ -182,6 +194,16 @@ void main() {
       expect(result, Left(ServerFailure('')));
     });
 
+    test('should return common failure when SSL Certificate is invalid',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getPopularMovies()).thenThrow(TlsException());
+      // act
+      final result = await repository.getPopularMovies();
+      // assert
+      expect(result, Left(CommonFailure('Invalid Certificate')));
+    });
+
     test(
         'should return connection failure when device is not connected to the internet',
         () async {
@@ -219,6 +241,16 @@ void main() {
       final result = await repository.getTopRatedMovies();
       // assert
       expect(result, Left(ServerFailure('')));
+    });
+
+    test('should return common failure when SSL Certificate is invalid',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getTopRatedMovies()).thenThrow(TlsException());
+      // act
+      final result = await repository.getTopRatedMovies();
+      // assert
+      expect(result, Left(CommonFailure('Invalid Certificate')));
     });
 
     test(
@@ -287,6 +319,17 @@ void main() {
       expect(result, equals(Left(ServerFailure(''))));
     });
 
+    test('should return common failure when SSL Certificate is invalid',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getMovieDetail(tId)).thenThrow(TlsException());
+      // act
+      final result = await repository.getMovieDetail(tId);
+      // assert
+      verify(mockRemoteDataSource.getMovieDetail(tId));
+      expect(result, equals(Left(CommonFailure('Invalid Certificate'))));
+    });
+
     test(
         'should return connection failure when the device is not connected to internet',
         () async {
@@ -333,6 +376,18 @@ void main() {
       expect(result, equals(Left(ServerFailure(''))));
     });
 
+    test('should return common failure when SSL Certificate is invalid',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getMovieRecommendations(tId))
+          .thenThrow(TlsException());
+      // act
+      final result = await repository.getMovieRecommendations(tId);
+      // assertbuild runner
+      verify(mockRemoteDataSource.getMovieRecommendations(tId));
+      expect(result, equals(Left(CommonFailure('Invalid Certificate'))));
+    });
+
     test(
         'should return connection failure when the device is not connected to the internet',
         () async {
@@ -373,6 +428,16 @@ void main() {
       final result = await repository.searchMovies(tQuery);
       // assert
       expect(result, Left(ServerFailure('')));
+    });
+
+    test('should return common failure when SSL Certificate is invalid',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.searchMovies(tQuery)).thenThrow(TlsException());
+      // act
+      final result = await repository.searchMovies(tQuery);
+      // assert
+      expect(result, Left(CommonFailure('Invalid Certificate')));
     });
 
     test(

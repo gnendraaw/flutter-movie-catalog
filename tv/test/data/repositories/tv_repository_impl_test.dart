@@ -126,6 +126,19 @@ void main() {
         verify(mockRemoteDataSource.getTvOnAir());
         expect(result, equals(Left(ServerFailure(''))));
       });
+
+      test('should return common failure when SSL Certificate is invalid',
+          () async {
+        // arrange
+        when(mockRemoteDataSource.getTvOnAir()).thenThrow(TlsException());
+
+        // act
+        final result = await repository.getTvOnAir();
+
+        // assert
+        verify(mockRemoteDataSource.getTvOnAir());
+        expect(result, equals(Left(CommonFailure('Invalid Certificate'))));
+      });
     });
 
     group('when device is offline', () {
@@ -188,6 +201,19 @@ void main() {
       expect(result, Left(ServerFailure('')));
     });
 
+    test('should return common failure when SSL Certificate is invalid',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getPopularTv()).thenThrow(TlsException());
+
+      // act
+      final result = await repository.getPopularTv();
+
+      // assert
+      verify(mockRemoteDataSource.getPopularTv());
+      expect(result, equals(Left(CommonFailure('Invalid Certificate'))));
+    });
+
     test(
         'should return connection failure when device is not connected to internet',
         () async {
@@ -227,6 +253,19 @@ void main() {
 
       // assert
       expect(result, Left(ServerFailure('')));
+    });
+
+    test('should return common failure when SSL Certificate is invalid',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getTopRatedTv()).thenThrow(TlsException());
+
+      // act
+      final result = await repository.getTopRatedTv();
+
+      // assert
+      verify(mockRemoteDataSource.getTopRatedTv());
+      expect(result, equals(Left(CommonFailure('Invalid Certificate'))));
     });
 
     test(
@@ -307,6 +346,19 @@ void main() {
       verify(mockRemoteDataSource.getTvDetail(tId));
       expect(result,
           equals(Left(ConnectionFailure('Failed to connect to the network'))));
+    });
+
+    test('should return common failure when SSL Certificate is invalid',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getTvDetail(tId)).thenThrow(TlsException());
+
+      // act
+      final result = await repository.getTvDetail(tId);
+
+      // assert
+      verify(mockRemoteDataSource.getTvDetail(tId));
+      expect(result, equals(Left(CommonFailure('Invalid Certificate'))));
     });
   });
 
@@ -424,6 +476,20 @@ void main() {
       expect(result, equals(Left(ServerFailure(''))));
     });
 
+    test('should return common failure when SSL Certificate is invalid',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getTvRecommendations(tId))
+          .thenThrow(TlsException());
+
+      // act
+      final result = await repository.getTvRecommendations(tId);
+
+      // assert
+      verify(mockRemoteDataSource.getTvRecommendations(tId));
+      expect(result, equals(Left(CommonFailure('Invalid Certificate'))));
+    });
+
     test(
         'should return connection failure when the device is not connected to the internet',
         () async {
@@ -468,6 +534,19 @@ void main() {
 
       // assert
       expect(result, Left(ServerFailure('')));
+    });
+
+    test('should return common failure when SSL Certificate is invalid',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.searchTvs(tQuery)).thenThrow(TlsException());
+
+      // act
+      final result = await repository.searchTvs(tQuery);
+
+      // assert
+      verify(mockRemoteDataSource.searchTvs(tQuery));
+      expect(result, equals(Left(CommonFailure('Invalid Certificate'))));
     });
 
     test(
