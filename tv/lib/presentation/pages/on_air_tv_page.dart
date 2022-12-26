@@ -42,6 +42,7 @@ class _OnAirTvPageState extends State<OnAirTvPage> {
               );
             } else if (state is OnAirTvError) {
               return Center(
+                key: Key('error_message'),
                 child: Text(state.message),
               );
             } else {
