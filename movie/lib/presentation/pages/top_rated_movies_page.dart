@@ -40,6 +40,7 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
               );
             } else if (state is MovieTopRatedError) {
               return Center(
+                key: Key('error_message'),
                 child: Text(state.message),
               );
             } else {
