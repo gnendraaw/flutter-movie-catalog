@@ -42,6 +42,7 @@ class _TopRatedTvsPageState extends State<TopRatedTvsPage> {
               );
             } else if (state is TopRatedTvError) {
               return Center(
+                key: Key('error_message'),
                 child: Text(state.message),
               );
             } else {
