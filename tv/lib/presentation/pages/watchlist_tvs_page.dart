@@ -52,6 +52,7 @@ class _WatchlistTvsPageState extends State<WatchlistTvsPage> with RouteAware {
               );
             } else if (state is TvWatchlistError) {
               return Center(
+                key: Key('error_message'),
                 child: Text(state.message),
               );
             } else {

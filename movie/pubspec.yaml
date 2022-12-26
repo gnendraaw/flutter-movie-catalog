@@ -32,7 +32,6 @@ dependencies:
       ref: master
   path_provider: ^2.0.11
   firebase_crashlytics: ^3.0.7
-  mocktail: ^0.3.0
 
 dev_dependencies:
   flutter_test:
@@ -41,6 +40,7 @@ dev_dependencies:
   bloc_test: ^9.1.0
   mockito: ^5.3.2
   build_runner: ^2.3.0
+  mocktail: ^0.3.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
