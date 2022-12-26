@@ -52,6 +52,7 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
               );
             } else if (state is MovieWatchlistError) {
               return Center(
+                key: Key('error_message'),
                 child: Text(state.message),
               );
             } else {
